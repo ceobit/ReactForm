@@ -1,47 +1,32 @@
 import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../context";
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    minWidth: 120,
-  },
-}));
 
 export default function LawWorkAddress() {
-  const classes = useStyles();
-
   const [state, setState] = useContext(AppContext);
-
-  const [commonState, setCommonState] = useState({
-    lawWorkPostcode: "",
-    lawWorkRegion: "",
-    lawWorkCity: "",
-    lawWorkStreet: "",
-    lawWorkHouse: "",
-    lawWorkCase: "",
-    lawWorkOffice: "",
-  });
+  const [inputDisabled, setInputDisabled] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setCommonState((prev) => ({ ...prev, ...{ [name]: value } }));
+    setState((prev) => ({ ...prev, ...{ [name]: value } }));
   };
 
   useEffect(() => {
     if (state.pullData) {
       setState((state) => {
-        return { ...state, ...commonState };
+        return { ...state };
       });
-      console.log(commonState);
     }
   }, [state.pullData]);
+
+    useEffect(() => {
+        if (state.currentFormId !== "" && !state.needChangeForm) {
+            setInputDisabled(true);
+        }
+    }, [state.currentFormId, state.needChangeForm]);
 
   return (
     <>
@@ -52,8 +37,9 @@ export default function LawWorkAddress() {
           label="Индекс"
           fullWidth
           autoComplete="off"
-          value={commonState.lawWorkPostcode}
+          value={state.lawWorkPostcode}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -64,8 +50,9 @@ export default function LawWorkAddress() {
           label="Регион"
           fullWidth
           autoComplete="off"
-          value={commonState.lawWorkRegion}
+          value={state.lawWorkRegion}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -76,8 +63,9 @@ export default function LawWorkAddress() {
           label="Город"
           fullWidth
           autoComplete="off"
-          value={commonState.lawWorkCity}
+          value={state.lawWorkCity}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -88,8 +76,9 @@ export default function LawWorkAddress() {
           label="Улица"
           fullWidth
           autoComplete="off"
-          value={commonState.lawWorkStreet}
+          value={state.lawWorkStreet}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={4}>
@@ -100,8 +89,9 @@ export default function LawWorkAddress() {
           label="Дом"
           fullWidth
           autoComplete="off"
-          value={commonState.lawWorkHouse}
+          value={state.lawWorkHouse}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={4}>
@@ -111,8 +101,9 @@ export default function LawWorkAddress() {
           label="Корпус"
           fullWidth
           autoComplete="off"
-          value={commonState.lawWorkCase}
+          value={state.lawWorkCase}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={4}>
@@ -122,8 +113,9 @@ export default function LawWorkAddress() {
           label="Офис№"
           fullWidth
           autoComplete="off"
-          value={commonState.lawWorkOffice}
+          value={state.lawWorkOffice}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
     </>

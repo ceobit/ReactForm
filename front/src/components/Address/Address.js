@@ -17,54 +17,54 @@ const useStyles = makeStyles((theme) => ({
 export default function Address({ sameAddress }) {
   const classes = useStyles();
 
-  let address;
-
   const [state, setState] = useContext(AppContext);
-
-  address = {
-    addressType: "",
-    postcode: "",
-    region: "",
-    city: "",
-    street: "",
-    house: "",
-    case: "",
-    flat: "",
-  };
-  const [commonState, setCommonState] = useState(address);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setCommonState((prev) => ({ ...prev, ...{ [name]: value } }));
-  };
+  const [inputDisabled, setInputDisabled] = useState(false);
 
   useEffect(() => {
     if (state.pullData) {
       setState((state) => {
-        return { ...state, ...commonState };
+        return { ...state };
       });
-      console.log(commonState);
     }
   }, [state.pullData]);
+
+  useEffect(() => {
+      if (state.currentFormId !== "" && !state.needChangeForm) {
+      setInputDisabled(true);
+    }
+  }, [state.currentFormId, state.needChangeForm]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setState((prev) => ({ ...prev, ...{ [name]: value } }));
+  };
 
   return (
     <>
       <Grid item xs={12} sm={6}>
-        <FormControl required className={classes.formControl}>
-          <InputLabel id="labelAddressId">Тип жилья</InputLabel>
+        <FormControl
+          required
+          className={classes.formControl}
+          disabled={inputDisabled}
+        >
+          <InputLabel id="labelAddressId" disabled={inputDisabled}>
+            Тип жилья
+          </InputLabel>
           <Select
             labelId="labelAddressId"
             name="addressType"
-            value={commonState.addressType}
+            value={state.addressType}
             onChange={handleInputChange}
           >
             <MenuItem value="">
               <em>-</em>
             </MenuItem>
-            <MenuItem value="10">Собственная квартира</MenuItem>
-            <MenuItem value="20">У родственников</MenuItem>
-            <MenuItem value="30">Социальный найм</MenuItem>
-            <MenuItem value="40">Аренда</MenuItem>
+            <MenuItem value="Собственная квартира">
+              Собственная квартира
+            </MenuItem>
+            <MenuItem value="У родственников">У родственников</MenuItem>
+            <MenuItem value="Социальный найм">Социальный найм</MenuItem>
+            <MenuItem value="Аренда">Аренда</MenuItem>
           </Select>
         </FormControl>
       </Grid>
@@ -75,8 +75,9 @@ export default function Address({ sameAddress }) {
           label="Индекс"
           fullWidth
           autoComplete="off"
-          value={commonState.postcode}
+          value={state.postcode}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -87,8 +88,9 @@ export default function Address({ sameAddress }) {
           label="Регион"
           fullWidth
           autoComplete="off"
-          value={commonState.region}
+          value={state.region}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -99,8 +101,9 @@ export default function Address({ sameAddress }) {
           label="Город"
           fullWidth
           autoComplete="off"
-          value={commonState.city}
+          value={state.city}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -111,8 +114,9 @@ export default function Address({ sameAddress }) {
           label="Улица"
           fullWidth
           autoComplete="off"
-          value={commonState.street}
+          value={state.street}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={2}>
@@ -123,19 +127,21 @@ export default function Address({ sameAddress }) {
           label="Дом"
           fullWidth
           autoComplete="off"
-          value={commonState.house}
+          value={state.house}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={2}>
         <TextField
           type="text"
-          name="case"
+          name="cas"
           label="Корпус"
           fullWidth
           autoComplete="off"
-          value={commonState.case}
+          value={state.cas}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={2}>
@@ -145,8 +151,9 @@ export default function Address({ sameAddress }) {
           label="Квартира"
           fullWidth
           autoComplete="off"
-          value={commonState.flat}
+          value={state.flat}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
     </>

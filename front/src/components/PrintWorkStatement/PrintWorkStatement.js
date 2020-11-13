@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-import PrintFormContent from './PrintFormContent';
+import PrintWorkStatementContent from './PrintWorkStatementContent';
 
 const useStyles = makeStyles((theme) => ({
     flex: {
@@ -20,11 +20,10 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
-        width: "130px"
     },
 }));
 
-export default function PrintForm() {
+export default function PrintWorkStatement() {
     const classes = useStyles();
 
     const history = useHistory();
@@ -35,7 +34,7 @@ export default function PrintForm() {
 
     return (
         <div className={classes.flex}>
-            <PrintFormContent/>
+            <PrintWorkStatementContent/>
             <div className={classes.buttons}>
             <Button
                 onClick={handleBack}

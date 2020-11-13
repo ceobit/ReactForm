@@ -1,10 +1,7 @@
 import React, { useState } from "react";
+import initialState from '../data/initialState';
 
 const AppContext = React.createContext([{}, p => {}]);
-
-const initialState = {
-  currentFormId:""
-};
 
 const AppContextProvider = (props) => {
   const [state, setState] = useState(initialState);

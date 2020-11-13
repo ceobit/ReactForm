@@ -64,7 +64,8 @@ export default function AuthPage() {
   const loginHandler = async () => {
     try {
       const data = await request("/signin", "POST", { ...form });
-      auth.login(data.token, data.userId);
+      // debugger;
+      auth.login(data.token, data.user.userId, data.user.name);
     } catch (e) {
       setError(true);
     }

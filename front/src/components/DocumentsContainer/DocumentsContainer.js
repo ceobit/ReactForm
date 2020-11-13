@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
@@ -10,13 +10,11 @@ import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import Form from "../Form/Form";
 import Contract from "../../pages/Contract";
-import WorkStatement from "../WorkStatement/WorkStatement";
+import WorkStatement from "../../pages/WorkStatement";
 import { useHttp } from "../../hooks/http.hook";
 import { AppContext } from "../../context";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
-import PrintFormContent from '../PrintForm/PrintFormContent';
-import PrintForm from '../PrintForm/PrintForm';
 
 function Copyright() {
   return (
@@ -67,19 +65,6 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ["Заявка", "Договор", "Акт выполненных работ"];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <Form />;
-    case 1:
-      return <Contract />;
-    case 2:
-      return <WorkStatement />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
-
 export default function DocumentContainer() {
   const classes = useStyles();
 
@@ -89,7 +74,8 @@ export default function DocumentContainer() {
   const token = useContext(AuthContext);
   const history = useHistory();
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.preventDefault();
     setActiveStep(activeStep + 1);
   };
 
@@ -97,14 +83,43 @@ export default function DocumentContainer() {
     setActiveStep(activeStep - 1);
   };
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
     setState((state) => {
       return { ...state, pullData: true };
     });
   };
 
-  const handlePrint = () => {
-    history.push("/print");
+  // const handleCheckAndNext = (e) => {
+  //   e.preventDefault();
+  //   setActiveStep(activeStep + 1);
+  // };
+
+  const handlePrint = (event) => {
+    const { id } = event.target.parentElement;
+    switch (id) {
+      case "btnForm":
+        return history.push("/printForm");
+      case "btnContract":
+        return history.push("/printContract");
+      case "btnWorkStatement":
+        return history.push("/printWorkStatement");
+      default:
+      // throw new Error("Неизвестная печатная форма");
+    }
+  };
+
+  const getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return <Form handleSave={handleSave} />;
+      case 1:
+        return <Contract handleSave={handleSave} />;
+      case 2:
+        return <WorkStatement handleSave={handleSave} />;
+      default:
+        throw new Error("Unknown step");
+    }
   };
 
   useEffect(() => {
@@ -113,21 +128,33 @@ export default function DocumentContainer() {
         return { ...state, submit: true };
       });
     }
-  }, [state.pullData]);
+  }, [state.pullData, setState]);
 
   useEffect(async () => {
+    let id;
+    if (state.needChangeForm && state.currentFormId !== "") {
+      id = `/${state.currentFormId}`;
+    } else {
+      id = "";
+    }
+
     if (state.submit) {
       try {
-        const data = await request("/form", "POST", state, {
+        const data = await request(`/form${id}`, "POST", state, {
           Authorization: `Bearer${token}`,
         });
         setState((state) => {
-          return { ...state, submit: false };
+          return {
+            ...state,
+            submit: false,
+            currentFormId: data.data.formNumber,
+            needChangeForm: false,
+          };
         });
       } catch (e) {}
       console.log("Submitted up to date", state);
     }
-  }, [state.submit]);
+  }, [state.submit, setState, state.needChangeForm]);
 
   return (
     <React.Fragment>
@@ -148,41 +175,86 @@ export default function DocumentContainer() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Работа с клиентом завершена
                 </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
+                <Typography variant="subtitle1"></Typography>
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  <Button
-                    className={classes.button}
-                    variant="contained"
-                    color="primary"
-                    onClick={state.currentFormId === "" ? handleSave: handlePrint}
-                  >
-                    {" "}
-                    {state.currentFormId === "" ? "Сохранить": "Печатать"}
-                  </Button>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Назад
-                    </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? "Place order" : "Дальше"}
-                  </Button>
-                </div>
+                <form
+                  onSubmit={activeStep === 0 ? handleNext : handleSave}
+                >
+                  {getStepContent(activeStep)}
+                  <div className={classes.buttons}>
+                    {activeStep !== 0 && (
+                      <>
+                        <Button
+                          className={classes.button}
+                          type="submit"
+                          id="btnForm"
+                          variant="contained"
+                          color="primary"
+                          onClick={
+                            state.currentFormId === "" || state.needChangeForm
+                              ? null
+                              : handlePrint
+                          }
+                        >
+                          {" "}
+                          {state.currentFormId === "" || state.needChangeForm
+                            ? "Сохранить"
+                            : "Печать анкеты"}
+                        </Button>
+                        {state.currentFormId !== "" && !state.needChangeForm && (
+                          <Button
+                            type="submit"
+                            className={classes.button}
+                            id="btnContract"
+                            variant="contained"
+                            color="primary"
+                            onClick={
+                              state.currentFormId === "" || state.needChangeForm
+                                ? null
+                                : handlePrint
+                            }
+                          >
+                            {" "}
+                            Печать договора
+                          </Button>
+                        )}
+                        {activeStep === steps.length - 1 &&
+                          state.currentFormId !== "" &&
+                          !state.needChangeForm && (
+                            <Button
+                              id="btnWorkStatement"
+                              variant="contained"
+                              color="primary"
+                              onClick={handlePrint}
+                              className={classes.button}
+                            >
+                              Печать акта
+                            </Button>
+                          )}
+                        <Button onClick={handleBack} className={classes.button}>
+                          Назад
+                        </Button>
+                      </>
+                    )}
+                    {activeStep !== steps.length - 1 && (
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        onClick={
+                          activeStep === 0 ? null : handleNext
+                        }
+                        className={classes.button}
+                      >
+                        Дальше
+                      </Button>
+                    )}
+                  </div>
+                </form>
               </React.Fragment>
             )}
           </React.Fragment>
