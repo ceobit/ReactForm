@@ -1,23 +1,41 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {AppContext} from '../../context';
-import moment from 'moment';
+import { AppContext } from "../../context";
+import moment from "moment";
+import getAge from "../../aux/getAge";
+import arrayDebt from "../../data/arrayDebt";
+import arrayBankVisit from '../../data/arrayBankVisit';
+import arrayContactPersons from '../../data/arrayContactPersons';
+import printTable from '../../aux/printTable';
 
 const useStyles = makeStyles((theme) => ({
   default: {
     margin: 0,
-    padding: 0,
+    paddingLeft: "5px",
   },
 }));
 
 export default function PrintFormContent() {
   const classes = useStyles();
   const [state, setState] = useContext(AppContext);
-  
+
+  let familyStatus = state.familyStatus;
+  if (state.sex === "Мужской" && state.familyStatus === "10") {
+    familyStatus = "Женат";
+  } else if (state.sex === "Женский" && state.familyStatus === "10") {
+    familyStatus = "Замужем";
+  } else if (state.sex === "Мужской" && state.familyStatus === "20") {
+    familyStatus = "Холост";
+  } else if (state.sex === "Женский" && state.familyStatus === "20") {
+    familyStatus = "Не замужем";
+  }
+
   return (
     <>
       <p align="center">
-        <strong>Анкета – Заявление на получение кредита № {state.currentFormId}</strong>
+        <strong>
+          Анкета – Заявление на получение кредита № {state.currentFormId}
+        </strong>
       </p>
       <table
         border="1"
@@ -65,486 +83,539 @@ export default function PrintFormContent() {
           </tr>
           <tr>
             <td width="684" colSpan="21" valign="top">
-              <p>
-                <strong>{`Фамилия: ${state.clientSurname} Имя: ${state.clientName} Отчество: ${state.clientPatronymic}`}</strong>
+              <p className={classes.default}>
+                <strong>Фамилия: </strong>
+                {state.clientSurname} <strong>Имя: </strong>
+                {state.clientName} <strong> Отчество:</strong>{" "}
+                {state.clientPatronymic}
               </p>
-              <p>
+              <p className={classes.default}>
                 <strong>Менялись ли ваши фамилия, имя, отчество? </strong>
                 (если да, укажите прежние Ф.И.О. и год изменения)
               </p>
-              <p>
+              <p className={classes.default}>
                 <strong>{state.changedNameCheckBox} </strong>
               </p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="107" colspan="2" valign="top">
+            <td width="107" colSpan="2" valign="top">
               <p className={classes.default}>
                 <strong>Пол</strong>
               </p>
-              <p>{state.sex}</p>
+              <p className={classes.default}>{state.sex}</p>
             </td>
-            <td width="119" colspan="2" valign="top">
+            <td width="119" colSpan="2" valign="top">
               <p className={classes.default}>
                 <strong>Дата рождения: </strong>
               </p>
-              <p>
-                <strong className={classes.default}>Возраст: </strong>
+              <p className={classes.default}>
+                <strong>Возраст: </strong>
               </p>
             </td>
-            <td width="290" colspan="12" valign="top">
-              <p className={classes.default}>{moment(state.birthDayDate).format("DD.MM.YYYY")}</p>
-              <p>{state.yearsOld}</p>
+            <td width="290" colSpan="12" valign="top">
+              <p className={classes.default}>
+                {moment(state.birthDayDate).format("DD.MM.YYYY")}
+              </p>
+              <p className={classes.default}>{getAge(state.birthDayDate)}</p>
             </td>
-            <td width="168" colspan="6" valign="top">
+            <td width="168" colSpan="5" valign="top">
               <p className={classes.default}>
                 <strong>Гражданство:</strong>
               </p>
-              <p>{state.clientNationality}</p>
-            </td>
-          </tr>
-          <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                <strong>Паспорт гражданина Российской Федерации: </strong>
-                {`Серия ${state.passSerial} Номер ${state.passNumber}  Дата выдачи: ${moment(state.issueDate).format("DD.MM.YYYY")}`}
-              </p>
-              <p>{`Кем выдан паспорт: ${state.passDepartment}`}</p>
-              <p>{`Код подразделения: ${state.passDepartmentCode}`}</p>
+              <p className={classes.default}>{state.clientNationality}</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>Паспорт гражданина Российской Федерации: </strong>
+                <strong>Серия: </strong> {state.passSerial}{" "}
+                <strong>Номер: </strong> {state.passNumber}{" "}
+                <strong>Дата выдачи: </strong>{" "}
+                {moment(state.issueDate).format("DD.MM.YYYY")}
+              </p>
+              <p className={classes.default}>
+                <strong>Выдан: </strong>
+                {state.passDepartment}
+                <strong> Код подразделения: </strong>
+                {state.passDepartmentCode}
+              </p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="684" colSpan="21" valign="top">
               <p>КОНТАКТНАЯ ИНФОРМАЦИЯ</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
                 <strong>Мобильный телефон: </strong>
                 {state.mobilePhone}
               </p>
-              <p>
+              <p className={classes.default}>
                 <strong>Рабочий телефон: </strong>
                 {state.workPhone}
               </p>
-              <p>
+              <p className={classes.default}>
                 <strong>Адрес электронной почты </strong>
-                <strong>(Email)</strong>
+                <strong>(Email): </strong>
                 {state.email}
               </p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                <strong>Укажите адрес постоянной регистрации</strong>:
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>Адрес постоянной регистрации: </strong>
                 {state.residenceAddressType}
               </p>
-              <p>
-                {`Индекс: ${state.residencePostcode} Регион: ${state.residenceRegion}  Город: ${state.residenceCity}  Улица: ${state.residenceStreet}
-                Дом: ${state.residenceHouse} Корпус: ${state.residenceCase} Квартира: ${state.residenceFlat}`}
+              <p className={classes.default}>
+                {`Индекс: ${state.residencePostcode} ${state.residenceRegion}  г. ${state.residenceCity} ул. ${state.residenceStreet}
+                д. ${state.residenceHouse} корпус ${state.residenceCase} кв. ${state.residenceFlat}`}
               </p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
                 <strong>Адрес фактического проживания: </strong>
-                {state.AddressType}
+                {!state.sameAddressCheckBox && state.addressType}
               </p>
-              <p>
-                {`Индекс: ${state.postcode} Регион: ${state.region}  Город: ${state.city}  Улица: ${state.street}
-                Дом: ${state.house} Корпус: ${state.case} Квартира: ${state.flat}`}
-              </p>
-              <p>
-                <strong>Укажите срок проживания по фактическому адресу:</strong>
+              {!state.sameAddressCheckBox ? (
+                <p className={classes.default}>
+                  {`Индекс: ${state.postcode} ${state.region} г. ${state.city} ул. ${state.street}
+                д. ${state.house} корпус ${state.case} кв. ${state.flat}`}
+                </p>
+              ) : (
+                <p className={classes.default}>
+                  Совпадает с адресом регистрации{" "}
+                </p>
+              )}
+              <p className={classes.default}>
+                <strong>Срок проживания по фактическому адресу: </strong>
                 {state.livePeriod}
               </p>
             </td>
             <td width="4"></td>
           </tr>
+          {state.tempAddressCheckBox && (
+            <tr>
+              <td width="684" colSpan="21" valign="top">
+                <p className={classes.default}>
+                  <strong>Адрес временной регистрации: </strong>
+                </p>
+                <p className={classes.default}>
+                  {`Индекс: ${state.tempPostcode} ${state.tempRegion} г. ${state.tempCity} ул. ${state.tempStreet}
+                д. ${state.tempHouse} корпус ${state.tempCase} кв. ${state.tempFlat}`}
+                </p>
+                <p className={classes.default}>
+                  <strong>Срок регистрации : с </strong>
+                  {moment(state.tempStartDate).format("DD.MM.YYYY")} <strong> до </strong>
+                  {moment(state.tempEndDate).format("DD.MM.YYYY")}
+                </p>
+              </td>
+              <td width="4"></td>
+            </tr>
+          )}
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                <strong>Укажите адрес временной регистрации</strong>:
-              </p>
-              <p>
-                {`Индекс: ${state.tempPostcode} Регион: ${state.tempRegion}  Город: ${state.tempCity}  Улица: ${state.tempStreet}
-                Дом: ${state.tempHouse} Корпус: ${state.tempCase} Квартира: ${state.tempFlat}`}
-              </p>
-              <p>
-                <strong>Укажите срок регистрации : с </strong>
-                {state.idStartDateTempAddress} <strong> до </strong>
-                {state.idEndDateTempAddress}
-              </p>
-            </td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="684" colspan="21" valign="top">
+            <td width="684" colSpan="21" valign="top">
               <p>СВЕДЕНИЯ О СЕМЬЕ</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
+            <td width="684" colSpan="21" valign="top">
               <p className={classes.default}>
-                <strong>Семейное положение:</strong>
-                {state.familyStatus}
+                <strong>Семейное положение: </strong>
+                {familyStatus}
               </p>
             </td>
           </tr>
           <tr>
-            <td width="518" colspan="17" valign="top">
-              <p>
-                <strong>Укажите количество членов семьи</strong>:{" "}
-                {state.familyCount},<strong>из них дети</strong>
+            <td width="518" colSpan="17" valign="top">
+              <p className={classes.default}>
+                <strong>Количество членов семьи: </strong>
+                {state.familyCount},<strong> из них дети: </strong>
                 {state.childrenCount}
               </p>
             </td>
-            <td width="75" colspan="3" valign="top">
-              <p>Проживает совместно</p>
+            <td width="75" colSpan="3" valign="top">
+              <p className={classes.default}>Проживает совместно</p>
             </td>
             <td width="92" valign="top">
-              <p>На иждивении</p>
+              <p className={classes.default}>На иждивении</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
+            <td width="684" colSpan="21" valign="top">
               <p>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                <strong>Отношение к воинской службе:</strong>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>Отношение к воинской службе:</strong>{" "}
+                {state.militaryStatus}
               </p>
-              <p>{state.militaryStatus}</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p align="left">
-                <strong>Судимости</strong>:
+            <td width="684" colSpan="21" valign="top">
+              <p align="left" className={classes.default}>
+                <strong>Судимости</strong>: {state.criminalStatus}
               </p>
-              <p>{state.criminalStatus}</p>
-              <p>Подпись _________________________________</p>
+              <p className={classes.default}>
+                Подпись _________________________________
+              </p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
+            <td width="684" colSpan="21" valign="top">
               <p>ИНФОРМАЦИЯ ОБ ОБРАЗОВАНИИ</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                <strong>Образование:</strong>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>Образование: </strong>
                 {state.educationStatus}
               </p>
             </td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
+            <td width="684" colSpan="21" valign="top">
               <p>ИНФОРМАЦИЯ О ТРУДОУСТРОЙСТВЕ</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                <strong>Работа по трудовому договору/контракту:</strong>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>Работа по трудовому договору/контракту: </strong>
                 {state.workStatus}
               </p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                <strong>
-                  Укажите название компании/организации : {state.companyName}
-                </strong>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>Название компании/организации : </strong>{" "}
+                {state.companyName}
               </p>
-              <p>
-                Ф.И.О. Руководителя компании/организации:{" "}
+              <p className={classes.default}>
+                <strong>Ф.И.О. Руководителя компании/организации: </strong>
                 {state.companyHeadName}
               </p>
-              <p>
-                Подразделение {state.companyDepartment} Должность{" "}
+              <p className={classes.default}>
+                <strong> Подразделение: </strong> {state.companyDepartment}{" "}
+                <strong>Должность: </strong>
                 {state.companyPosition}
               </p>
-              <p>
-                <strong>Юридический адрес компании/организации</strong>:
+              <p className={classes.default}>
+                <strong>Юридический адрес компании/организации: </strong>
               </p>
-              <p>
-                {`Индекс: ${state.lawWorkPostcode} Регион: ${state.lawWorkRegion}  Город: ${state.lawWorkCity}  Улица: ${state.lawWorkStreet}
-                Дом: ${state.lawWorkHouse} Корпус: ${state.lawWorkCase} офис: ${state.lawWorkOffice}`}
+              <p className={classes.default}>
+                {`Индекс: ${state.lawWorkPostcode} ${state.lawWorkRegion} г. ${state.lawWorkCity} ул. ${state.lawWorkStreet}
+                д. ${state.lawWorkHouse} корпус ${state.lawWorkCase} оф. ${state.lawWorkOffice}`}
               </p>
-              <p>
-                <strong>Фактический адрес компании/организации</strong>:
+              <p className={classes.default}>
+                <strong>Фактический адрес компании/организации: </strong>
               </p>
-              <p>
-                {`Индекс: ${state.workPostcode} Регион: ${state.workRegion}  Город: ${state.workCity}  Улица: ${state.workStreet}
-                Дом: ${state.workHouse} Корпус: ${state.workCase} офис: ${state.workOffice}`}
+              {!state.sameWorkAddressCheckBox ? (
+                <p className={classes.default}>
+                  {`Индекс: ${state.workPostcode} ${state.workRegion} г. ${state.workCity} ул. ${state.workStreet}
+                д. ${state.workHouse} корпус ${state.workCase} оф. ${state.workOffice}`}
+                </p>
+              ) : (
+                <p className={classes.default}>
+                  Совпадает с юридическим адресом
+                </p>
+              )}
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="308" colSpan="8" valign="top">
+              <p className={classes.default}>
+                <strong>Количество сотрудников в компании: </strong>{" "}
+                {state.workerCount}
+              </p>
+            </td>
+            <td width="376" colSpan="13" valign="top">
+              <p className={classes.default}>
+                <strong>Как долго Вы работаете в компании: </strong>{" "}
+                {state.workTime}
+              </p>
+              <p className={classes.default}>
+                <strong>Количество рабочих мест за последние 3 года: </strong>{" "}
+                {state.countWorkPlaces}
               </p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="308" colspan="8" valign="top">
-              <p>
-                <strong>Количество сотрудников в компании: </strong>
-              </p>
-              <p>{state.workerCount}</p>
-            </td>
-            <td width="376" colspan="13" valign="top">
-              <p>
-                <strong>Как долго Вы работаете в компании</strong>:
-              </p>
-              <p>{state.workTime}</p>
-              <p>
-                <strong>Количество рабочих мест за последние 3 года</strong>
-              </p>
-              <p>{state.countWorkPlaces}</p>
-            </td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="684" colspan="21" valign="top">
+            <td width="684" colSpan="21" valign="top">
               <p>ИНФОРМАЦИЯ О ДОХОДАХ/РАСХОДАХ</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="276" colspan="6" valign="top">
-              <p>
+            <td width="276" colSpan="6" valign="top" align="center">
+              <p className={classes.default}>
                 <strong>Ежемесячные доходы</strong>
               </p>
             </td>
-            <td width="88" colspan="7" valign="top">
-              <p>
+            <td width="88" colSpan="7" valign="top" align="center">
+              <p className={classes.default}>
                 <strong>Размер, руб.</strong>
               </p>
             </td>
-            <td width="227" colspan="6" valign="top">
-              <p>
+            <td width="227" colSpan="6" valign="top" align="center">
+              <p className={classes.default}>
                 <strong>Обязательные ежемесячные платежи</strong>
               </p>
             </td>
-            <td width="94" colspan="2" valign="top">
-              <p>
+            <td width="94" colSpan="2" valign="top" align="center">
+              <p className={classes.default}>
                 <strong>Размер, руб.</strong>
               </p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="276" colspan="6" valign="top">
-              <p>Основная Зарплата (после уплаты налогов)форма 2НДФЛ</p>
-            </td>
-            <td width="88" colspan="7" valign="top"></td>
-            <td width="227" colspan="6" valign="top">
-              <p>Плата за образование</p>
-            </td>
-            <td width="94" colspan="2" valign="top"></td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="276" colspan="6" valign="top">
-              <p>Доход от сдачи в аренду недвижимости (после уплаты налогов)</p>
-            </td>
-            <td width="88" colspan="7" valign="top"></td>
-            <td width="227" colspan="6" valign="top">
-              <p>Арендные платежи</p>
-            </td>
-            <td width="94" colspan="2" valign="top"></td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="276" colspan="6" valign="top">
-              <p>Алименты</p>
-            </td>
-            <td width="88" colspan="7" valign="top"></td>
-            <td width="227" colspan="6" valign="top">
-              <p>Алименты уплачиваемые</p>
-            </td>
-            <td width="94" colspan="2" valign="top"></td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="276" colspan="6" valign="top">
-              <p>Прочие (указать вид дохода)</p>
-            </td>
-            <td width="88" colspan="7" valign="top"></td>
-            <td width="227" colspan="6" valign="top">
-              <p>Выплаты по исполнительным документам</p>
-            </td>
-            <td width="94" colspan="2" valign="top"></td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="276" colspan="6" valign="top">
-              <p>
-                <strong>ИТОГО:</strong>
+            <td width="276" colSpan="6" valign="top">
+              <p className={classes.default}>
+                Основная Зарплата (после уплаты налогов) форма 2НДФЛ
               </p>
             </td>
-            <td width="88" colspan="7" valign="top"></td>
-            <td width="227" colspan="6" valign="top">
-              <p>Страхование</p>
+            <td width="88" colSpan="7" valign="top">
+              <p className={classes.default}>{state.income0}</p>
             </td>
-            <td width="94" colspan="2" valign="top"></td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="276" colspan="6" valign="top">
-              <p>
-                <strong>Среднемесячный доход семьи:</strong>
-              </p>
+            <td width="227" colSpan="6" valign="top">
+              <p className={classes.default}>Плата за образование</p>
             </td>
-            <td width="88" colspan="7" valign="top"></td>
-            <td width="227" colspan="6" valign="top">
-              <p>
-                <strong>ИТОГО:</strong>
-              </p>
-            </td>
-            <td width="94" colspan="2" valign="top"></td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>
-                ДОКУМЕНТЫ, ПОДТВЕРЖДАЮЩИЕ ПРАВО СОБСТВЕННОСТИ, ПРЕДОСТАВЛЕНЫ
-              </p>
+            <td width="94" colSpan="2" valign="top">
+              <p className={classes.default}>{state.cost0}</p>
             </td>
             <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>{state.hasDocumentCheckBox}</p>
+            <td width="276" colSpan="6" valign="top">
+              <p className={classes.default}>
+                Доход от сдачи в аренду недвижимости (после уплаты налогов)
+              </p>
+            </td>
+            <td width="88" colSpan="7" valign="top">
+              <p className={classes.default}>{state.income1}</p>
+            </td>
+            <td width="227" colSpan="6" valign="top">
+              <p className={classes.default}>Арендные платежи</p>
+            </td>
+            <td width="94" colSpan="2" valign="top">
+              <p className={classes.default}>{state.cost1}</p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="276" colSpan="6" valign="top">
+              <p className={classes.default}>Алименты</p>
+            </td>
+            <td width="88" colSpan="7" valign="top">
+              <p className={classes.default}>{state.income2}</p>
+            </td>
+            <td width="227" colSpan="6" valign="top">
+              <p className={classes.default}>Алименты уплачиваемые</p>
+            </td>
+            <td width="94" colSpan="2" valign="top">
+              <p className={classes.default}>{state.cost2}</p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="276" colSpan="6" valign="top">
+              <p className={classes.default}>Прочие (указать вид дохода)</p>
+            </td>
+            <td width="88" colSpan="7" valign="top">
+              <p className={classes.default}>{state.income3}</p>
+            </td>
+            <td width="227" colSpan="6" valign="top">
+              <p className={classes.default}>
+                Выплаты по исполнительным документам
+              </p>
+            </td>
+            <td width="94" colSpan="2" valign="top">
+              <p className={classes.default}>{state.cost3}</p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="276" colSpan="6" valign="top">
+              <p className={classes.default}>
+                <strong>Итого:</strong>
+              </p>
+            </td>
+            <td width="88" colSpan="7" valign="top">
+              <p className={classes.default}>{state.incomeSum}</p>
+            </td>
+            <td width="227" colSpan="6" valign="top">
+              <p className={classes.default}>Страхование</p>
+            </td>
+            <td width="94" colSpan="2" valign="top">
+              <p className={classes.default}>{state.cost4}</p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="276" colSpan="6" valign="top">
+              <p className={classes.default}>
+                <strong>Среднемесячный доход семьи:</strong>{" "}
+                {state.averageIncome}
+              </p>
+            </td>
+            <td width="88" colSpan="7" valign="top"></td>
+            <td width="227" colSpan="6" valign="top">
+              <p className={classes.default}>
+                <strong>Итого:</strong>
+              </p>
+            </td>
+            <td width="94" colSpan="2" valign="top">
+              <p className={classes.default}>{state.costSum}</p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>
+                  Документы, подтверждающие право собственности, предоставлены:{" "}
+                </strong>
+                {state.hasDocumentCheckBox ? "Да" : "Нет"}
+              </p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="684" colSpan="21" valign="top" align="center">
+              <p>Кредитные обязательства</p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="176" colSpan="5" align="center">
+              <p className={classes.default}>Наименование банка</p>
+            </td>
+            <td width="165" colSpan="5" align="center">
+              <p className={classes.default}>Наличие просрочки платежа</p>
+            </td>
+            <td width="174" colSpan="5" align="center">
+              <p className={classes.default}>
+                Оставшаяся для погашения сумма (руб.)
+              </p>
+            </td>
+            <td width="181" colSpan="6" align="center">
+              <p className={classes.default}>
+                Ежемесячная сумма погашения (руб.)
+              </p>
+            </td>
+            {/*<td width="4" colSpan="1"></td>*/}
+          </tr>
+          {printTable(state.debt, arrayDebt, 5)}
+          <tr>
+            <td width="684" colSpan="21" valign="top" align="center">
+              <p>Куда обращались (за последние.6 мес.)</p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="84" colSpan="7" align="center">
+              <p className={classes.default}>Наименование банка</p>
+            </td>
+            <td width="76" colSpan="7" align="center">
+              <p className={classes.default}>Дата обращения</p>
+            </td>
+            <td width="129" colSpan="7" align="center">
+              <p className={classes.default}>Сумма обращения</p>
+            </td>
+          </tr>
+          {printTable(state.bankVisit, arrayBankVisit,7)}
+          <tr>
+            <td width="684" colSpan="21" valign="top">
+              <p className={classes.default}>
+                <strong>
+                  Наличие кредитной истории (погашенные кредиты):{" "}
+                </strong>{" "}
+                {state.hasCreditHistory ? "Да" : "Нет"}
+              </p>
+            </td>
+            <td width="4"></td>
+          </tr>
+          <tr>
+            <td width="688" colSpan="22" valign="top">
+              <p className={classes.default}>
+                <strong>Контактные лица: </strong>
+              </p>
+            </td>
+          </tr>
+          {printTable(state.contactPersons, arrayContactPersons, 5)}
+          <tr>
+            <td width="688" colSpan="22" valign="top">
+              <p>
+                <strong></strong>
+              </p>
+              <p>
+                <strong></strong>
+              </p>
+              <p>
+                <strong></strong>
+              </p>
               <p>
                 <strong></strong>
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="342" colspan="14" valign="top">
-              <p>КРЕДИТНЫЕ ОБЯЗАТЕЛЬСТВА</p>
-            </td>
-            <td width="342" colspan="7" valign="top">
-              <p>КУДА ОБРАЩАЛИСЬ (за последние.6 мес.)</p>
-            </td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="92" align="center">
-              <p>Наименование банка</p>
-            </td>
-            <td width="99" colspan="2" align="center">
-              <p>Наличие просрочки платежа</p>
-            </td>
-            <td width="108" colspan="4">
-              <p align="center">Оставшаяся для погашения сумма (валюта)</p>
-            </td>
-            <td width="96" colspan="7">
-              <p align="center">Ежемесячная сумма погашения (валюта)</p>
-            </td>
-            <td width="84">
-              <p align="center">Наименование банка</p>
-            </td>
-            <td width="76" colspan="3">
-              <p align="center">Дата обращения</p>
-            </td>
-            <td width="129" colspan="3">
-              <p align="center">Сумма обращения</p>
-            </td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="92" valign="top"></td>
-            <td width="99" colspan="2" valign="top"></td>
-            <td width="108" colspan="4" valign="top"></td>
-            <td width="96" colspan="7" valign="top"></td>
-            <td width="84" valign="top"></td>
-            <td width="76" colspan="3" valign="top"></td>
-            <td width="129" colspan="3" valign="top"></td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="684" colspan="21" valign="top">
-              <p>НАЛИЧИЕ КРЕДИТНОЙ ИСТОРИИ (ПОГАШЕННЫЕ КРЕДИТЫ)</p>
-            </td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="328" colspan="9" valign="top">
-              <p>Да</p>
-            </td>
-            <td width="356" colspan="12" valign="top">
-              <p>Нет</p>
-            </td>
-            <td width="4"></td>
-          </tr>
-          <tr>
-            <td width="688" colspan="22" valign="top">
-              <p>КОНТАКТНЫЕ ЛИЦА ( Ф.И.О.):</p>
-            </td>
-          </tr>
-          <tr>
-            <td width="688" colspan="22" valign="top">
-              <p>
-                <strong></strong>
-              </p>
-              <p>
-                <strong></strong>
-              </p>
-              <p>
-                <strong></strong>
-              </p>
-              <p>
-                <strong></strong>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td width="688" colspan="22">
-              <p>
+            <td width="688" colSpan="22">
+              <p className={classes.default}>
                 <strong>
                   Заполнив и подписав настоящую анкету, я понимаю и соглашаюсь с
                   тем, что:
                 </strong>
                 <br />
               </p>
-              <p>
+              <p className={classes.default}>
                 1. Я предоставил Анкету-Заявление для получения консультационной
                 услуги, направленной на поиск Банка либо иной кредитной
                 организации (в том числе микрофинансовой организации) для
                 получения мной кредита с примерными параметрами и на цели
                 указанные в анкете.
               </p>
-              <p>
+              <p className={classes.default}>
                 2. Информация, предоставленная мной в связи с кредитованием (в
                 том числе в Анкете-Заявлении), является полной, точной и
                 достоверной во всех отношениях.
               </p>
-              <p>3. Кодовое слово (желательно девичья фамилия матери):</p>
-              <p>
+              <p className={classes.default}>
+                3. Кодовое слово (желательно девичья фамилия матери):
+              </p>
+              <p className={classes.default}>
                 4. Принятие к рассмотрению Анкеты–Заявления Клиента не означает
                 возникновения обязательства по предоставлению кредита.
               </p>
-              <p>
+              <p className={classes.default}>
                 5. Я выражаю свое согласие на осуществление обработки (сбора,
                 систематизации, накопления, хранения, уточнения (обновления,
                 изменения), использования, распространения (в том числе
@@ -558,31 +629,37 @@ export default function PrintFormContent() {
                 предоставляется с момента подписания настоящей Анкеты-Заявления
                 на весь срок моей жизни.
               </p>
-              <p>
+              <p className={classes.default}>
                 Настоящее согласие может быть отозвано мной при предоставлении
-                заявления в простой письменной форме в соответствии с требованиями законодательства Российской Федерации.
+                заявления в простой письменной форме в соответствии с
+                требованиями законодательства Российской Федерации.
               </p>
-              <p>
+              <p className={classes.default}>
                 6. В случае принятия отрицательного решения ИП Фомченко И.Е не
                 обязан возвращать мне настоящую Анкету-заявление.
               </p>
             </td>
           </tr>
           <tr>
-            <td width="344" colspan="11">
-              <p>ИП Фомченко И.Е</p>
+            <td width="344" colSpan="11">
+              <p className={classes.default}>ИП Фомченко И.Е</p>
             </td>
-            <td width="344" colspan="11">
-              <p>{`Дата заполнения: ${moment(state.created_at).format("DD.MM.YYYY")}`}</p>
+            <td width="344" colSpan="11">
+              <p className={classes.default}>{`Дата заполнения: ${moment(
+                state.created_at
+              ).format("DD.MM.YYYY")}`}</p>
             </td>
           </tr>
           <tr>
-            <td width="344" colspan="11">
-              {" "}
-              <p>_______________________________</p>
+            <td width="344" colSpan="11">
+              <p></p>
+              <p className={classes.default}>_________________</p>
+              <p className={classes.default}>Подпись</p>
             </td>
-            <td width="344" colspan="11">
-              <p>__________________________________ _________________ Ф.И.О.</p>
+            <td width="344" colSpan="11">
+              <p></p>
+              <p className={classes.default}>__________________________________/_________________</p>
+              <p className={classes.default}>ФИО/Подпись</p>
             </td>
           </tr>
         </tbody>

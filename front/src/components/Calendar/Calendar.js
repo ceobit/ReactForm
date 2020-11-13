@@ -8,6 +8,7 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import getAge from '../../aux/getAge';
 
 const useStyles = makeStyles((theme) => ({
   age: {
@@ -15,37 +16,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Calendar({ id, label, value, onChangeValue = f => f}) {
+export default function Calendar({ id, label, value, name, onChangeValue = f => f}) {
   const classes = useStyles();
-
-  const agetostr = (age) => {
-    let txt;
-    let count = age % 100;
-    if (count >= 5 && count <= 20) {
-      txt = "лет";
-    } else {
-      count = count % 10;
-      if (count === 1) {
-        txt = "год";
-      } else if (count >= 2 && count <= 4) {
-        txt = "года";
-      } else {
-        txt = "лет";
-      }
-    }
-    return age + " " + txt;
-  };
-
-  const getAge = (dateString) => {
-    const today = new Date();
-    const birthDate = new Date(dateString);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return agetostr(age);
-  };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -58,6 +30,7 @@ export default function Calendar({ id, label, value, onChangeValue = f => f}) {
             id={id}
             label={label}
             value={value}
+            name={name}
             onChange={onChangeValue}
             KeyboardButtonProps={{
               "aria-label": "change date",

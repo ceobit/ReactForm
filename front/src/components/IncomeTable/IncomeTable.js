@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../context";
+import getRandom from "../../aux/getRandom";
 
 const income = [
   "Основная Зарплата (форма 2НДФЛ)",
@@ -37,40 +38,53 @@ export default function IncomeTable() {
   const classes = useStyles();
 
   const [state, setState] = useContext(AppContext);
+  const [inputDisabled, setInputDisabled] = useState(false);
 
-  const [commonState, setCommonState] = useState({
-    values: [],
-  });
-
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setCommonState((prev) => ({ ...prev, ...{ [name]: value } }));
-  // };
+  const value0 = useRef("");
+  const value1 = useRef("");
+  const value2 = useRef("");
+  const value3 = useRef("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setCommonState({values: {...commonState, [name]:value}});
+    setState((prev) => ({ ...prev, ...{ [name]: value } }));
   };
 
+  const incomeCalculation = () => {
+    const income0 = +value0.current.value;
+    const income1 = +value1.current.value;
+    const income2 = +value2.current.value;
+    const income3 = +value3.current.value;
 
-  // useEffect(() => {
-  //   if (state.pullData) {
-  //     setState((state) => {
-  //       return { ...state, ...commonState };
-  //     });
-  //   }
-  // }, [state.pullData]);
+    let sum = income0 + income1 + income2 + income3;
 
-  // const incomeCalculation = () => {
-  //   let sum =
-  //     +commonState.income1 +
-  //     +commonState.income2 +
-  //     +commonState.income3 +
-  //     +commonState.income4;
-  //
-  //   console.log(+commonState.income1);
-  //   setCommonState(sum);
-  // };
+    setState((prev) => ({
+      ...prev,
+      ...{
+        ["incomeSum"]: sum,
+        ["income0"]: income0,
+        ["income1"]: income1,
+        ["income2"]: income2,
+        ["income3"]: income3,
+      },
+    }));
+  };
+
+  useEffect(() => {
+    if (state.pullData) {
+      setState((state) => {
+        return {
+          ...state,
+        };
+      });
+    }
+  }, [state.pullData]);
+
+  useEffect(() => {
+    if (state.currentFormId !== "" && !state.needChangeForm) {
+      setInputDisabled(true);
+    }
+  }, [state.currentFormId, state.needChangeForm]);
 
   return (
     <>
@@ -80,14 +94,9 @@ export default function IncomeTable() {
       {income.map((item, index) => {
         return (
           <>
-            <Grid
-              item
-              xs={12}
-              sm={8}
-              className={classes.table}
-              key={Math.random()}
-            >
+            <Grid key={index} item xs={12} sm={8} className={classes.table}>
               <TextField
+                key={index}
                 variant="outlined"
                 defaultValue={item}
                 InputProps={{
@@ -98,25 +107,20 @@ export default function IncomeTable() {
                 fullWidth
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              className={classes.table}
-              key={Math.random()}
-            >
+            <Grid key={index} item xs={12} sm={4} className={classes.table}>
               <TextField
+                key={index}
                 type="number"
                 variant="outlined"
-                name={`commonState.values[index]`}
+                inputRef={eval(`value${index}`)}
                 size="small"
                 fullWidth
                 label="Сумма"
-                // value={commonState.values[index]}
-                // onChange={() => {
-                //   incomeCalculation();
-                // }}
-                  onChange={handleInputChange}
+                value={eval(`state.income${index}`)}
+                onChange={() => {
+                  incomeCalculation();
+                }}
+                disabled={inputDisabled}
               />
             </Grid>
           </>
@@ -142,20 +146,23 @@ export default function IncomeTable() {
           fullWidth
           label="Сумма"
           name="incomeSum"
-          // value={commonState.incomeSum}
+          value={state.incomeSum}
           InputProps={{
             readOnly: true,
           }}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12}>
         <TextField
           type="number"
-          id="companyName"
-          name="companyName"
+          name="averageIncome"
           label="Среднемесячный доход семьи"
           fullWidth
           autoComplete="off"
+          value={state.averageIncome}
+          disabled={inputDisabled}
+          onChange={handleInputChange}
         />
       </Grid>
     </>

@@ -1,167 +1,17 @@
-const { NotFoundError, Forbidden } = require('../errors/errors');
-const { DataNotFoundMessage, NotAccessMessage, DataDeletedMessage } = require('../errors/errorsMessages');
+const { NotFoundError, Forbidden } = require("../errors/errors");
+const {
+  DataNotFoundMessage,
+  NotAccessMessage,
+  DataDeletedMessage,
+} = require("../errors/errorsMessages");
 
 const Forms = require("../models/form");
+const { keys } = require("../data");
 
 module.exports.createForm = (req, res, next) => {
-  const {
-    formNumber,
-    loanAmount,
-    loanPeriod,
-    loanGoal,
-    clientSurname,
-    clientName,
-    clientPatronymic,
-    oldName,
-    oldNameDate,
-    sex,
-    birthDayDate,
-    clientNationality,
-    passSerial,
-    passNumber,
-    passDepartment,
-    passDepartmentCode,
-    mobilePhone,
-    residenceAddressType,
-    addressType,
-    cas,
-    changedNameCheckBox,
-    city,
-    companyDepartment,
-    companyHeadName,
-    companyName,
-    companyPosition,
-    countWorkPlaces,
-    criminalStatus,
-    educationStatus,
-    familyCount,
-    familyStatus,
-    familyStatusNote,
-    flat,
-    hasDocumentCheckBox,
-    house,
-    issueDate,
-    lawWorkCase,
-    lawWorkCity,
-    lawWorkHouse,
-    lawWorkOffice,
-    lawWorkPostcode,
-    lawWorkRegion,
-    lawWorkStreet,
-    livePeriod,
-    militaryStatus,
-    postcode,
-    region,
-    residenceCase,
-    residenceCity,
-    residenceFlat,
-    residenceHouse,
-    residencePostcode,
-    residenceRegion,
-    residenceStreet,
-    sameAddressCheckBox,
-    sameWorkAddressCheckBox,
-    street,
-    tempAddressCheckBox,
-    tempAddressType,
-    tempCase,
-    tempCity,
-    tempFlat,
-    tempHouse,
-    tempPostcode,
-    tempRegion,
-    tempStreet,
-    workCase,
-    workCity,
-    workHouse,
-    workOffice,
-    workPostcode,
-    workRegion,
-    workStatus,
-    workStreet,
-    workTime,
-    workerCount,
-  } = req.body;
+  const { ...keys } = req.body;
 
-  Forms.create({
-    formNumber,
-    loanAmount,
-    loanPeriod,
-    loanGoal,
-    clientSurname,
-    clientName,
-    clientPatronymic,
-    oldName,
-    oldNameDate,
-    sex,
-    birthDayDate,
-    clientNationality,
-    passSerial,
-    passNumber,
-    passDepartment,
-    passDepartmentCode,
-    mobilePhone,
-    residenceAddressType,
-    addressType,
-    cas,
-    changedNameCheckBox,
-    city,
-    companyDepartment,
-    companyHeadName,
-    companyName,
-    companyPosition,
-    countWorkPlaces,
-    criminalStatus,
-    educationStatus,
-    familyCount,
-    familyStatus,
-    familyStatusNote,
-    flat,
-    hasDocumentCheckBox,
-    house,
-    issueDate,
-    lawWorkCase,
-    lawWorkCity,
-    lawWorkHouse,
-    lawWorkOffice,
-    lawWorkPostcode,
-    lawWorkRegion,
-    lawWorkStreet,
-    livePeriod,
-    militaryStatus,
-    postcode,
-    region,
-    residenceCase,
-    residenceCity,
-    residenceFlat,
-    residenceHouse,
-    residencePostcode,
-    residenceRegion,
-    residenceStreet,
-    sameAddressCheckBox,
-    sameWorkAddressCheckBox,
-    street,
-    tempAddressCheckBox,
-    tempAddressType,
-    tempCase,
-    tempCity,
-    tempFlat,
-    tempHouse,
-    tempPostcode,
-    tempRegion,
-    tempStreet,
-    workCase,
-    workCity,
-    workHouse,
-    workOffice,
-    workPostcode,
-    workRegion,
-    workStatus,
-    workStreet,
-    workTime,
-    workerCount,
-    owner: req.user._id,
-  })
+  Forms.create({ ...keys, owner: req.user._id })
     .then((form) => res.send({ data: form }))
     .catch(next);
 };
@@ -176,10 +26,17 @@ module.exports.getForms = (req, res, next) => {
 module.exports.getFormId = (req, res, next) => {
   const { formId } = req.params;
 
-  Forms.findOne({formNumber:formId})
-      .orFail(() => new NotFoundError(DataNotFoundMessage))
+  Forms.findOne({ formNumber: formId })
+    .orFail(() => new NotFoundError(DataNotFoundMessage))
+    .then((form) => res.send({ data: form }))
+    .catch(next);
+};
+
+module.exports.updateForm = (req, res, next) => {
+  const { formId } = req.params;
+  const { ...keys } = req.body;
+
+  Forms.findOneAndUpdate({formNumber:formId},{ ...keys})
       .then((form) => res.send({ data: form }))
       .catch(next);
 };
-
-

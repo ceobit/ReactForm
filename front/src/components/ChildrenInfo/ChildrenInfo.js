@@ -10,6 +10,8 @@ export default function ChildrenInfo({
   liveTogetherId,
   dependenceId,
 }) {
+
+
   const [state, setState] = useContext(AppContext);
   //
   //

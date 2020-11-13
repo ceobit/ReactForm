@@ -26,6 +26,10 @@ import Button from "@material-ui/core/Button";
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
 import { AppContext } from "../context/AppContext";
+import initialState from "../data/initialState";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import { Search } from "@material-ui/icons";
+import TextField from "@material-ui/core/TextField";
 
 function createData(
   state,
@@ -226,24 +230,24 @@ const useToolbarStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(0),
     marginLeft: theme.spacing(2),
   },
+  searchInput: {
+    width: "75%",
+  },
 }));
 
-const EnhancedTableToolbar = (props) => {
+const EnhancedTableToolbar = ({
+  numSelected,
+  currentId,
+  handleChangeForm = (f) => f,
+  handleSearch = (f) => f,
+}) => {
   const classes = useToolbarStyles();
-  const { numSelected, currentId } = props;
 
   const history = useHistory();
 
   const handleCreateForm = () => {
     history.push("/create");
   };
-
-  // const handleOpenCurrentForm = () => {
-  //   // setState((state) => {
-  //   //   return { ...state, currentFormId:  };
-  //   // });
-  //   // history.push("/create");
-  // };
 
   return (
     <Toolbar
@@ -269,6 +273,15 @@ const EnhancedTableToolbar = (props) => {
           >
             {" "}
             Открыть
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={handleChangeForm}
+          >
+            {" "}
+            Редактировать
           </Button>
         </div>
       ) : (
@@ -302,7 +315,19 @@ const EnhancedTableToolbar = (props) => {
       ) : (
         <Tooltip title="Filter list">
           <IconButton aria-label="filter list">
-            <FilterListIcon />
+            {/*<FilterListIcon />*/}
+            <TextField
+              label="Поиск клиента"
+              className={classes.searchInput}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+              onChange={handleSearch}
+            />
           </IconButton>
         </Tooltip>
       )}
@@ -312,7 +337,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
-  selected: PropTypes.number.isRequired,
+  // selected: PropTypes.number.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -348,27 +373,45 @@ export default function MainPage() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [forms, setForms] = useState([]);
+  const [savedStateForm, setSavedStateForm] = useState([]);
 
   const { request } = useHttp();
-  const [forms, setForms] = useState([]);
   const token = useContext(AuthContext);
+  const history = useHistory();
+
+  let rows = [];
 
   const fetchForms = useCallback(async () => {
     try {
       const data = await request("/form", "GET", null, {
         Authorization: `Bearer${token}`,
       });
-      setForms(data.data);
+      setForms((prev) => [...prev, ...data.data]);
+      setSavedStateForm((prev) => [...prev, ...data.data]);
     } catch (e) {
-      console.log("ошибка");
+      console.log("ошибка при получении данных на главной странице");
     }
   }, [request]);
 
+  //При открытии обнулим стейт
   useEffect(() => {
+    const userName = state.userName;
+    setState({ ...initialState, userName });
+  }, []);
+
+  useEffect(() => {
+    setState((prev) => ({
+      ...prev,
+      currentFormId: "",
+      submit: false,
+      pullData: false,
+    }));
     fetchForms();
   }, [fetchForms]);
 
-  const rows = createRows(forms);
+
+  rows = createRows(forms);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -406,8 +449,6 @@ export default function MainPage() {
 
     setSelected(newSelected);
 
-    console.log(selectedIndex);
-
     currentFormId = selectedIndex !== 0 ? currentId : "";
 
     setState((state) => {
@@ -433,10 +474,35 @@ export default function MainPage() {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+  //Поиск в таблице
+  const handleSearch = (e) => {
+    let target = e.target;
+    if (target.value === "") {
+      setForms([...savedStateForm]);
+    } else
+      setForms([
+        ...forms.filter((x) =>
+          x.clientSurname.toLowerCase().includes(target.value.toLowerCase())
+        ),
+      ]);
+  };
+
+  //Установим признак режима редактирования
+  const handleChangeForm = () => {
+    history.push("/create");
+    setState((state) => {
+      return { ...state, needChangeForm: true };
+    });
+  };
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          handleChangeForm={handleChangeForm}
+          handleSearch={handleSearch}
+        />
         <TableContainer>
           <Table
             className={classes.table}

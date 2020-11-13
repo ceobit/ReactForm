@@ -9,6 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Button from '@material-ui/core/Button';
 
 import { AuthContext } from "../../context/AuthContext";
+import {AppContext} from '../../context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,12 +21,18 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  logout: {
+    "&:hover": {
+      backgroundColor: "blue"
+    }
+  }
 }));
 
 export default function MenuAppBar() {
   const classes = useStyles();
 
   const auth = useContext(AuthContext);
+  const [state, setState] = useContext(AppContext);
   const history = useHistory();
 
   const handleLogout = event => {
@@ -53,84 +60,8 @@ export default function MenuAppBar() {
         <Typography variant="h6" className={classes.title}>
           Финансовая компания
         </Typography>
-        <Button color="inherit" onClick={handleLogout}>Выход</Button>
+        <Button color="inherit" onClick={handleLogout}>{state.userName}</Button>
       </Toolbar>
     </AppBar>
   );
 }
-
-// export default function MenuAppBar() {
-//   const classes = useStyles();
-//   const auth= useContext(AuthContext);
-//   const [anchorEl, setAnchorEl] = React.useState(null);
-//   const open = Boolean(anchorEl);
-//
-//   const handleChange = (event) => {
-//     setAuth(event.target.checked);
-//   };
-//
-//   const handleMenu = (event) => {
-//     setAnchorEl(event.currentTarget);
-//   };
-//
-//   const handleClose = () => {
-//     setAnchorEl(null);
-//   };
-//
-//   return (
-//     <div className={classes.root}>
-//       <FormGroup>
-//           <FormControlLabel
-//               control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-//               label='Выход'
-//           />
-//       </FormGroup>
-//       <AppBar position="fixed">
-//         <Toolbar>
-//           <IconButton
-//             edge="start"
-//             className={classes.menuButton}
-//             color="inherit"
-//             aria-label="menu"
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography variant="h6" className={classes.title}>
-//             Финансовая компания
-//           </Typography>
-//           {auth && (
-//             <div>
-//               <IconButton
-//                 aria-label="account of current user"
-//                 aria-controls="menu-appbar"
-//                 aria-haspopup="true"
-//                 onClick={handleMenu}
-//                 color="inherit"
-//               >
-//                 <AccountCircle />
-//               </IconButton>
-//               <Menu
-//                 id="menu-appbar"
-//                 anchorEl={anchorEl}
-//                 anchorOrigin={{
-//                   vertical: "top",
-//                   horizontal: "right",
-//                 }}
-//                 keepMounted
-//                 transformOrigin={{
-//                   vertical: "top",
-//                   horizontal: "right",
-//                 }}
-//                 open={open}
-//                 onClose={handleClose}
-//               >
-//                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-//                 <MenuItem onClick={handleClose}>My account</MenuItem>
-//               </Menu>
-//             </div>
-//           )}
-//         </Toolbar>
-//       </AppBar>
-//     </div>
-//   );
-// }

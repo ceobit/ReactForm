@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
-
+const mongoose = require("mongoose");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const formSchema = new mongoose.Schema(
   {
@@ -58,14 +57,16 @@ const formSchema = new mongoose.Schema(
     mobilePhone: {
       type: String,
     },
-
+    workPhone: {
+      type: String,
+    },
     residenceAddressType: {
       type: String,
     },
     addressType: {
       type: String,
     },
-    case: {
+    cas: {
       type: String,
     },
     changedNameCheckBox: {
@@ -109,6 +110,9 @@ const formSchema = new mongoose.Schema(
       type: String,
     },
     hasDocumentCheckBox: {
+      type: Boolean,
+    },
+    hasCreditHistory: {
       type: Boolean,
     },
     house: {
@@ -237,7 +241,80 @@ const formSchema = new mongoose.Schema(
     workerCount: {
       type: String,
     },
-
+    email: {
+      type: String,
+    },
+    income0: {
+      type: Number,
+    },
+    income1: {
+      type: Number,
+    },
+    income2: {
+      type: Number,
+    },
+    income3: {
+      type: Number,
+    },
+    incomeSum: {
+      type: Number,
+    },
+    cost0: {
+      type: Number,
+    },
+    cost1: {
+      type: Number,
+    },
+    cost2: {
+      type: Number,
+    },
+    cost3: {
+      type: Number,
+    },
+    cost4: {
+      type: Number,
+    },
+    costSum: {
+      type: Number,
+    },
+    debt: [
+      {
+        type: String,
+      },
+    ],
+    bankVisit: [
+      {
+        type: String,
+      },
+    ],
+    contactPersons: [
+      {
+        type: String,
+      },
+    ],
+    completeWorks: [
+      {
+        type: String,
+      },
+    ],
+    tempStartDate: {
+      type: String,
+    },
+    tempEndDate: {
+      type: String,
+    },
+    averageIncome: {
+      type: Number,
+    },
+    serviceTime: {
+      type: Number,
+    },
+    costFirstStep: {
+      type: Number,
+    },
+    costSecondStep: {
+      type: Number,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
@@ -248,6 +325,6 @@ const formSchema = new mongoose.Schema(
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
 
-formSchema.plugin(AutoIncrement, {inc_field: 'formNumber'});
+formSchema.plugin(AutoIncrement, { inc_field: "formNumber" });
 
 module.exports = mongoose.model("form", formSchema);

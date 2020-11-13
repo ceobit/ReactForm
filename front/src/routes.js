@@ -4,6 +4,9 @@ import MainPage from './pages/MainPage';
 import AuthPage from './pages/AuthPage';
 import DocumentsContainer from './components/DocumentsContainer/DocumentsContainer';
 import PrintForm from './components/PrintForm/PrintForm';
+import PrintContract from './components/PrintContract/PrintContract';
+import WorkStatement from './pages/WorkStatement';
+import PrintWorkStatement from './components/PrintWorkStatement/PrintWorkStatement';
 
 export const useRoutes = (isAuth) => {
     if (isAuth) {
@@ -13,12 +16,20 @@ export const useRoutes = (isAuth) => {
                     <MainPage />
                     {/*<DocumentsContainer/>*/}
                     {/*<PrintForm/>*/}
+                    {/*<WorkStatement/>*/}
+                    {/*<PrintWorkStatement/>*/}
                 </Route>
                 <Route path="/create" exact>
                     <DocumentsContainer/>
                 </Route>
-                <Route path="/print" exact>
+                <Route path="/printForm" exact>
                     <PrintForm/>
+                </Route>
+                <Route path="/printContract" exact>
+                    <PrintContract/>
+                </Route>
+                <Route path="/printWorkStatement" exact>
+                    <PrintWorkStatement/>
                 </Route>
                 <Redirect to="/main" />
             </Switch>

@@ -18,53 +18,50 @@ export default function TempAddress() {
   const classes = useStyles();
 
   const [state, setState] = useContext(AppContext);
-
-  const [commonState, setCommonState] = useState({
-    tempAddressType: "",
-    tempPostcode: "",
-    tempRegion: "",
-    tempCity: "",
-    tempStreet: "",
-    tempHouse: "",
-    tempCase: "",
-    tempFlat: "",
-  });
+  const [inputDisabled, setInputDisabled] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setCommonState((prev) => ({ ...prev, ...{ [name]: value } }));
+    setState((prev) => ({ ...prev, ...{ [name]: value } }));
   };
 
   useEffect(() => {
     if (state.pullData) {
       setState((state) => {
-        return { ...state, ...commonState };
+        return { ...state };
       });
-        console.log(commonState);
     }
   }, [state.pullData]);
 
+    useEffect(() => {
+        if (state.currentFormId !== "" && !state.needChangeForm) {
+            setInputDisabled(true);
+        }
+    }, [state.currentFormId, state.needChangeForm]);
+
   return (
     <>
-        <Grid item xs={12} sm={6}>
-          <FormControl required className={classes.formControl}>
-            <InputLabel id="labelTempAddressId">Тип жилья</InputLabel>
-            <Select
-              labelId="labelTempAddressId"
-              name="tempAddressType"
-              value={commonState.tempAddressType}
-              onChange={handleInputChange}
-            >
-              <MenuItem value="">
-                <em>-</em>
-              </MenuItem>
-              <MenuItem value="10">Собственная квартира</MenuItem>
-              <MenuItem value="20">У родственников</MenuItem>
-              <MenuItem value="30">Социальный найм</MenuItem>
-              <MenuItem value="40">Аренда</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+      <Grid item xs={12} sm={6}>
+        <FormControl required className={classes.formControl} disabled={inputDisabled}>
+          <InputLabel id="labelTempAddressId">
+            Тип жилья
+          </InputLabel>
+          <Select
+            labelId="labelTempAddressId"
+            name="tempAddressType"
+            value={state.tempAddressType}
+            onChange={handleInputChange}
+          >
+            <MenuItem value="">
+              <em>-</em>
+            </MenuItem>
+            <MenuItem value="Собственная квартира">Собственная квартира</MenuItem>
+            <MenuItem value="У родственников">У родственников</MenuItem>
+            <MenuItem value="Социальный найм">Социальный найм</MenuItem>
+            <MenuItem value="Аренда">Аренда</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
           type="number"
@@ -72,8 +69,9 @@ export default function TempAddress() {
           label="Индекс"
           fullWidth
           autoComplete="off"
-          value={commonState.tempPostcode}
+          value={state.tempPostcode}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -84,8 +82,9 @@ export default function TempAddress() {
           label="Регион"
           fullWidth
           autoComplete="off"
-          value={commonState.tempRegion}
+          value={state.tempRegion}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -96,8 +95,9 @@ export default function TempAddress() {
           label="Город"
           fullWidth
           autoComplete="off"
-          value={commonState.tempCity}
+          value={state.tempCity}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -108,8 +108,9 @@ export default function TempAddress() {
           label="Улица"
           fullWidth
           autoComplete="off"
-          value={commonState.tempStreet}
+          value={state.tempStreet}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={2}>
@@ -120,8 +121,9 @@ export default function TempAddress() {
           label="Дом"
           fullWidth
           autoComplete="off"
-          value={commonState.tempHouse}
+          value={state.tempHouse}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={2}>
@@ -131,8 +133,9 @@ export default function TempAddress() {
           label="Корпус"
           fullWidth
           autoComplete="off"
-          value={commonState.tempCase}
+          value={state.tempCase}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
       <Grid item xs={12} sm={2}>
@@ -142,8 +145,9 @@ export default function TempAddress() {
           label="Квартира"
           fullWidth
           autoComplete="off"
-          value={commonState.tempFlat}
+          value={state.tempFlat}
           onChange={handleInputChange}
+          disabled={inputDisabled}
         />
       </Grid>
     </>
