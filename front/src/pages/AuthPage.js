@@ -64,7 +64,7 @@ export default function AuthPage() {
 
   const loginHandler = async () => {
     try {
-      const data = await request(`${API_URL}/signup`, "POST", { ...form });
+      const data = await request(`${API_URL}/signin`, "POST", { ...form });
       // debugger;
       auth.login(data.token, data.user.userId, data.user.name);
     } catch (e) {
