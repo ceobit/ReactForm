@@ -3,7 +3,7 @@ const { celebrate } = require("celebrate");
 const { login, createUser } = require("../controllers/users");
 const { accountSignIn, accountSignUp } = require("../models/validations");
 
-router.post("/signin", celebrate(accountSignIn), login);
-router.post("/signup", celebrate(accountSignUp), createUser);
+router.post("/api/signin", celebrate(accountSignIn), login);
+router.post("/api/signup", celebrate(accountSignUp), createUser);
 
 module.exports = router;
