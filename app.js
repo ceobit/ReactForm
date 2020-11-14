@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const path = require('path');
 
 const routers = require('./routers');
 const { NotFoundError } = require('./errors/errors');
@@ -51,6 +52,14 @@ app.use('/', routers);
 app.use('*', () => {
   throw new NotFoundError(ResourceNotFoundMessage);
 });
+
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'front', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'front', 'build', 'index.html'))
+  })
+}
 
 //  Обработчик ошибок celebrate
 app.use(errors());
