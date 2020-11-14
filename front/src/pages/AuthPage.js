@@ -14,6 +14,7 @@ import Copyright from "../components/CopyRight/CopyRight";
 
 import { AuthContext } from "../context/AuthContext";
 import { useHttp } from "../hooks/http.hook";
+import API_URL from '../data/URL';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -54,7 +55,7 @@ export default function AuthPage() {
 
   const registerHandler = async () => {
     try {
-      const data = await request("/signup", "POST", { ...form });
+      const data = await request(`${API_URL}/signup`, "POST", { ...form });
       // message(data.message);
     } catch (e) {
       setError(true);
@@ -63,7 +64,7 @@ export default function AuthPage() {
 
   const loginHandler = async () => {
     try {
-      const data = await request("/signin", "POST", { ...form });
+      const data = await request(`${API_URL}/signup`, "POST", { ...form });
       // debugger;
       auth.login(data.token, data.user.userId, data.user.name);
     } catch (e) {
