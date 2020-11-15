@@ -46,10 +46,9 @@ export default function PrintFormContent() {
       >
         <tbody>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>ПАРАМЕТРЫ КРЕДИТА</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="220px" colSpan="5" valign="top">
@@ -58,10 +57,9 @@ export default function PrintFormContent() {
             <td width="111px" colSpan="5" valign="top">
               <h3 className={classes.default}>Срок</h3>
             </td>
-            <td width="353px" colSpan="11" valign="top">
+            <td width="353px" colSpan="12" valign="top">
               <h3 className={classes.default}>Цель кредита:</h3>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="220px" colSpan="5" valign="top">
@@ -70,19 +68,17 @@ export default function PrintFormContent() {
             <td width="111px" colSpan="5" valign="top">
               <p className={classes.default}>{`${state.loanPeriod} мес.`}</p>
             </td>
-            <td width="353px" colSpan="11" valign="top">
+            <td width="353px" colSpan="12" valign="top">
               <p className={classes.default}>{`${state.loanGoal}`}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>ПЕРСОНАЛЬНЫЕ ДАННЫЕ</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Фамилия: </strong>
                 {state.clientSurname} <strong>Имя: </strong>
@@ -97,7 +93,6 @@ export default function PrintFormContent() {
                 <strong>{state.changedNameCheckBox} </strong>
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="107" colSpan="2" valign="top">
@@ -120,16 +115,15 @@ export default function PrintFormContent() {
               </p>
               <p className={classes.default}>{getAge(state.birthDayDate)}</p>
             </td>
-            <td width="168" colSpan="5" valign="top">
+            <td width="168" colSpan="6" valign="top">
               <p className={classes.default}>
                 <strong>Гражданство:</strong>
               </p>
               <p className={classes.default}>{state.clientNationality}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Паспорт гражданина Российской Федерации: </strong>
                 <strong>Серия: </strong> {state.passSerial}{" "}
@@ -144,16 +138,14 @@ export default function PrintFormContent() {
                 {state.passDepartmentCode}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>КОНТАКТНАЯ ИНФОРМАЦИЯ</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Мобильный телефон: </strong>
                 {state.mobilePhone}
@@ -168,10 +160,9 @@ export default function PrintFormContent() {
                 {state.email}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Адрес постоянной регистрации: </strong>
                 {state.residenceAddressType}
@@ -181,10 +172,9 @@ export default function PrintFormContent() {
                 д. ${state.residenceHouse} корпус ${state.residenceCase} кв. ${state.residenceFlat}`}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Адрес фактического проживания: </strong>
                 {!state.sameAddressCheckBox && state.addressType}
@@ -204,11 +194,10 @@ export default function PrintFormContent() {
                 {state.livePeriod}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           {state.tempAddressCheckBox && (
             <tr>
-              <td width="684" colSpan="21" valign="top">
+              <td width="684" colSpan="22" valign="top">
                 <p className={classes.default}>
                   <strong>Адрес временной регистрации: </strong>
                 </p>
@@ -222,17 +211,15 @@ export default function PrintFormContent() {
                   {moment(state.tempEndDate).format("DD.MM.YYYY")}
                 </p>
               </td>
-              <td width="4"></td>
             </tr>
           )}
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>СВЕДЕНИЯ О СЕМЬЕ</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Семейное положение: </strong>
                 {familyStatus}
@@ -250,28 +237,25 @@ export default function PrintFormContent() {
             <td width="75" colSpan="3" valign="top">
               <p className={classes.default}>Проживает совместно</p>
             </td>
-            <td width="92" valign="top">
+            <td width="92" colSpan="2" valign="top">
               <p className={classes.default}>На иждивении</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Отношение к воинской службе:</strong>{" "}
                 {state.militaryStatus}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p align="left" className={classes.default}>
                 <strong>Судимости</strong>: {state.criminalStatus}
               </p>
@@ -279,16 +263,14 @@ export default function PrintFormContent() {
                 Подпись _________________________________
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>ИНФОРМАЦИЯ ОБ ОБРАЗОВАНИИ</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Образование: </strong>
                 {state.educationStatus}
@@ -296,22 +278,20 @@ export default function PrintFormContent() {
             </td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>ИНФОРМАЦИЯ О ТРУДОУСТРОЙСТВЕ</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Работа по трудовому договору/контракту: </strong>
                 {state.workStatus}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Название компании/организации : </strong>{" "}
                 {state.companyName}
@@ -346,10 +326,9 @@ export default function PrintFormContent() {
                 </p>
               )}
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="308" colSpan="8" valign="top">
+            <td width="308" colSpan="9" valign="top">
               <p className={classes.default}>
                 <strong>Количество сотрудников в компании: </strong>{" "}
                 {state.workerCount}
@@ -365,13 +344,11 @@ export default function PrintFormContent() {
                 {state.countWorkPlaces}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p>ИНФОРМАЦИЯ О ДОХОДАХ/РАСХОДАХ</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top" align="center">
@@ -389,12 +366,11 @@ export default function PrintFormContent() {
                 <strong>Обязательные ежемесячные платежи</strong>
               </p>
             </td>
-            <td width="94" colSpan="2" valign="top" align="center">
+            <td width="94" colSpan="3" valign="top" align="center">
               <p className={classes.default}>
                 <strong>Размер, руб.</strong>
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top">
@@ -408,10 +384,9 @@ export default function PrintFormContent() {
             <td width="227" colSpan="6" valign="top">
               <p className={classes.default}>Плата за образование</p>
             </td>
-            <td width="94" colSpan="2" valign="top">
+            <td width="94" colSpan="3" valign="top">
               <p className={classes.default}>{state.cost0}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top">
@@ -425,10 +400,9 @@ export default function PrintFormContent() {
             <td width="227" colSpan="6" valign="top">
               <p className={classes.default}>Арендные платежи</p>
             </td>
-            <td width="94" colSpan="2" valign="top">
+            <td width="94" colSpan="3" valign="top">
               <p className={classes.default}>{state.cost1}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top">
@@ -440,10 +414,9 @@ export default function PrintFormContent() {
             <td width="227" colSpan="6" valign="top">
               <p className={classes.default}>Алименты уплачиваемые</p>
             </td>
-            <td width="94" colSpan="2" valign="top">
+            <td width="94" colSpan="3" valign="top">
               <p className={classes.default}>{state.cost2}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top">
@@ -457,10 +430,9 @@ export default function PrintFormContent() {
                 Выплаты по исполнительным документам
               </p>
             </td>
-            <td width="94" colSpan="2" valign="top">
+            <td width="94" colSpan="3" valign="top">
               <p className={classes.default}>{state.cost3}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top">
@@ -474,10 +446,9 @@ export default function PrintFormContent() {
             <td width="227" colSpan="6" valign="top">
               <p className={classes.default}>Страхование</p>
             </td>
-            <td width="94" colSpan="2" valign="top">
+            <td width="94" colSpan="3" valign="top">
               <p className={classes.default}>{state.cost4}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top">
@@ -492,13 +463,12 @@ export default function PrintFormContent() {
                 <strong>Итого:</strong>
               </p>
             </td>
-            <td width="94" colSpan="2" valign="top">
+            <td width="94" colSpan="3" valign="top">
               <p className={classes.default}>{state.costSum}</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>
                   Документы, подтверждающие право собственности, предоставлены:{" "}
@@ -506,13 +476,11 @@ export default function PrintFormContent() {
                 {state.hasDocumentCheckBox ? "Да" : "Нет"}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
-            <td width="684" colSpan="21" valign="top" align="center">
+            <td width="684" colSpan="22" valign="top" align="center">
               <p>Кредитные обязательства</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="176" colSpan="5" align="center">
@@ -526,7 +494,7 @@ export default function PrintFormContent() {
                 Оставшаяся для погашения сумма (руб.)
               </p>
             </td>
-            <td width="181" colSpan="6" align="center">
+            <td width="181" colSpan="7" align="center">
               <p className={classes.default}>
                 Ежемесячная сумма погашения (руб.)
               </p>
@@ -535,10 +503,9 @@ export default function PrintFormContent() {
           </tr>
           {printTable(state.debt, arrayDebt, 5)}
           <tr>
-            <td width="684" colSpan="21" valign="top" align="center">
+            <td width="684" colSpan="22" valign="top" align="center">
               <p>Куда обращались (за последние.6 мес.)</p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="84" colSpan="7" align="center">
@@ -547,13 +514,13 @@ export default function PrintFormContent() {
             <td width="76" colSpan="7" align="center">
               <p className={classes.default}>Дата обращения</p>
             </td>
-            <td width="129" colSpan="7" align="center">
+            <td width="129" colSpan="8" align="center">
               <p className={classes.default}>Сумма обращения</p>
             </td>
           </tr>
           {printTable(state.bankVisit, arrayBankVisit,7)}
           <tr>
-            <td width="684" colSpan="21" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>
                   Наличие кредитной истории (погашенные кредиты):{" "}
@@ -561,7 +528,6 @@ export default function PrintFormContent() {
                 {state.hasCreditHistory ? "Да" : "Нет"}
               </p>
             </td>
-            <td width="4"></td>
           </tr>
           <tr>
             <td width="688" colSpan="22" valign="top">

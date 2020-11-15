@@ -9,17 +9,18 @@ export const useAuth = () => {
   const [userId, setUserId] = useState(null);
   const [state, setState] = useContext(AppContext);
 
-  const login = useCallback((jwtToken, id, name) => {
+  const login = useCallback((jwtToken, id, name, login) => {
     setToken(jwtToken);
     setUserId(id);
-    setState((state) => ({ ...state, userName:name }));
+    setState((state) => ({ ...state, userName:name, login: login}));
 
     localStorage.setItem(
       storageName,
       JSON.stringify({
         userId: id,
         token: jwtToken,
-        userName: name
+        userName: name,
+        login: login
       })
     );
   }, []);
@@ -34,7 +35,7 @@ export const useAuth = () => {
     const data = JSON.parse(localStorage.getItem(storageName));
 
     if (data && data.token) {
-      login(data.token, data.userId, data.userName);
+      login(data.token, data.userId, data.userName, data.login);
     }
     setReady(true);
   }, [login]);

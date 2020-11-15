@@ -369,6 +369,7 @@ export default function MainPage() {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [state, setState] = useContext(AppContext);
+  debugger
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -396,7 +397,8 @@ export default function MainPage() {
   //При открытии обнулим стейт
   useEffect(() => {
     const userName = state.userName;
-    setState({ ...initialState, userName });
+    const login = state.login;
+    setState({ ...initialState, userName, login });
   }, []);
 
   useEffect(() => {
