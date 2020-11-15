@@ -63,7 +63,7 @@ export default function Form() {
 
   const fetchForms = useCallback(async () => {
     try {
-      const data = await request(`/form/${state.currentFormId}`, "GET", null, {
+      const data = await request(`/api/form/${state.currentFormId}`, "GET", null, {
         Authorization: `Bearer${token}`,
       });
 

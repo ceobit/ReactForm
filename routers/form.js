@@ -1,9 +1,9 @@
 const routerForms = require('express').Router();
 const { createForm, getForms, getFormId, updateForm } = require('../controllers/forms');
 
-routerForms.post('/form', createForm);
-routerForms.get('/form', getForms);
-routerForms.get('/form/:formId', getFormId);
-routerForms.post('/form/:formId', updateForm);
+routerForms.post('/api/form', createForm);
+routerForms.get('/api/form', getForms);
+routerForms.get('/api/form/:formId', getFormId);
+routerForms.post('/api/form/:formId', updateForm);
 
 module.exports = routerForms;
