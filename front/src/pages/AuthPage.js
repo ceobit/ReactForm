@@ -55,7 +55,7 @@ export default function AuthPage() {
 
   const registerHandler = async () => {
     try {
-      const data = await request(`/signup`, "POST", { ...form });
+      const data = await request(`/api/signup`, "POST", { ...form });
       // message(data.message);
     } catch (e) {
       setError(true);
@@ -64,7 +64,7 @@ export default function AuthPage() {
 
   const loginHandler = async () => {
     try {
-      const data = await request(`/signin`, "POST", { ...form });
+      const data = await request(`/api/signin`, "POST", { ...form });
       // debugger;
       auth.login(data.token, data.user.userId, data.user.name);
     } catch (e) {
