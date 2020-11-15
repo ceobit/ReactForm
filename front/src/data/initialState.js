@@ -101,6 +101,7 @@ const initialState = {
   costFirstStep: "",
   costSecondStep: "",
   userName: "",
+  login: ""
 };
 
 export default initialState;
