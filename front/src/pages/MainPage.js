@@ -219,7 +219,6 @@ const useToolbarStyles = makeStyles((theme) => ({
           backgroundColor: theme.palette.primary.dark,
         },
   title: {
-    // flex: '1 1 100%',
   },
   buttons: {
     display: "flex",
@@ -236,7 +235,6 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = ({
   numSelected,
-  currentId,
   handleChangeForm = (f) => f,
   handleSearch = (f) => f,
 }) => {
@@ -314,7 +312,6 @@ const EnhancedTableToolbar = ({
       ) : (
         <Tooltip title="Filter list">
           <IconButton aria-label="filter list">
-            {/*<FilterListIcon />*/}
             <TextField
               label="Поиск клиента"
               className={classes.searchInput}
@@ -323,7 +320,7 @@ const EnhancedTableToolbar = ({
                   <InputAdornment position="start">
                     <Search />
                   </InputAdornment>
-                ),
+                )
               }}
               onChange={handleSearch}
             />
@@ -369,7 +366,6 @@ export default function MainPage() {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [state, setState] = useContext(AppContext);
-  debugger
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);

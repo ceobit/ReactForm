@@ -249,6 +249,7 @@ export default function DocumentContainer() {
                           activeStep === 0 ? null : handleNext
                         }
                         className={classes.button}
+                        disabled={state.needChangeForm &&  activeStep !== 0}
                       >
                         Дальше
                       </Button>

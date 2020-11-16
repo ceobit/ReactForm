@@ -100,6 +100,9 @@ const formSchema = new mongoose.Schema(
     familyCount: {
       type: String,
     },
+    childrenCount: {
+      type: String,
+    },
     familyStatus: {
       type: String,
     },
@@ -297,6 +300,8 @@ const formSchema = new mongoose.Schema(
         type: String,
       },
     ],
+    childrenArray: { type: Array, default: [] },
+
     tempStartDate: {
       type: String,
     },
