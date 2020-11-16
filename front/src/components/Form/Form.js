@@ -26,7 +26,6 @@ import CustomTable from "../CustomTable/CustomTable";
 import arrayDebt from "../../data/arrayDebt";
 import arrayBankVisit from "../../data/arrayBankVisit";
 import arrayContactPersons from "../../data/arrayContactPersons";
-import arrayChildren from "../../data/arrayChildren";
 
 const useStyles = makeStyles((theme) => ({
   part: {
@@ -123,7 +122,7 @@ export default function Form() {
     setState((prevState) => ({
       ...prevState,
       ["childrenArray"]: [],
-      childrenCount: event.target.value
+      childrenCount: event.target.value,
     }));
 
     let i = event.target.value;

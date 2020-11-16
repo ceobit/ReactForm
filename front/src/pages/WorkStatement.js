@@ -27,7 +27,8 @@ export default function WorkStatement() {
   return (
     <>
       <Typography variant="subtitle2">
-       Для акта выполненных работ необходимо заполнить таблицу выполненных работ (услуг)
+        Для акта выполненных работ необходимо заполнить таблицу выполненных
+        работ (услуг)
       </Typography>
       <CustomTable
         arrayHeading={arrayCompleteWorks}

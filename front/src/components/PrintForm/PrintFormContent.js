@@ -8,7 +8,7 @@ import arrayBankVisit from "../../data/arrayBankVisit";
 import arrayContactPersons from "../../data/arrayContactPersons";
 import printTable from "../../aux/printTable";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   default: {
     margin: 0,
     paddingLeft: "5px",
@@ -260,7 +260,7 @@ export default function PrintFormContent() {
               <p className={classes.default}>На иждивении</p>
             </td>
           </tr>
-          {state["childrenArray"].map((el, i) => {
+          {state["childrenArray"].map(el => {
             return (
               <tr>
                 <td width="75" colSpan="7" valign="top">

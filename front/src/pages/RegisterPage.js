@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,8 +12,6 @@ import Container from "@material-ui/core/Container";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useHistory } from "react-router-dom";
 import Copyright from "../components/CopyRight/CopyRight";
-
-import { AuthContext } from "../context/AuthContext";
 import { useHttp } from "../hooks/http.hook";
 import Snackbar from "@material-ui/core/Snackbar";
 

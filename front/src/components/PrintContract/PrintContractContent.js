@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../context";
 import moment from "moment";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   default: {
     margin: 0,
     padding: 0,

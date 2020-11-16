@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   part: {
@@ -52,10 +51,6 @@ export default function Contract() {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setState((prev) => ({ ...prev, ...{ [name]: value } }));
-  };
-
-  const handleSave = () => {
-    console.log("отправляю");
   };
 
   return (

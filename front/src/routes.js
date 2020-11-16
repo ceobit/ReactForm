@@ -14,10 +14,6 @@ export const useRoutes = (isAuth) => {
       <Switch>
         <Route path="/main" exact>
           <MainPage />
-          {/*<DocumentsContainer/>*/}
-          {/*<PrintForm/>*/}
-          {/*<WorkStatement/>*/}
-          {/*<PrintWorkStatement/>*/}
         </Route>
         <Route path="/create" exact>
           <DocumentsContainer />
@@ -44,7 +40,7 @@ export const useRoutes = (isAuth) => {
       <Route path="/" exact>
         <LoginPage />
       </Route>
-      <Redirect to="/" exact />
+      <Redirect to="/" />
     </Switch>
   );
 };
