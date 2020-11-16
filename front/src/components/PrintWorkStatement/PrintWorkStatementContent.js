@@ -5,7 +5,7 @@ import moment from "moment";
 import arrayCompleteWorks from "../../data/arrayCompleteWorks";
 import printTable from "../../aux/printTable";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   default: {
     margin: 0,
   },

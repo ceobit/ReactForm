@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
     flex: {
         display: "flex",
         flexDirection: "column",
-        // justifyContent: "flex-end",
     },
     buttons: {
         display: "flex",

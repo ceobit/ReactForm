@@ -90,11 +90,6 @@ export default function DocumentContainer() {
     });
   };
 
-  // const handleCheckAndNext = (e) => {
-  //   e.preventDefault();
-  //   setActiveStep(activeStep + 1);
-  // };
-
   const handlePrint = (event) => {
     const { id } = event.target.parentElement;
     switch (id) {
@@ -157,7 +152,7 @@ export default function DocumentContainer() {
   }, [state.submit, setState, state.needChangeForm]);
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <main className={classes.layout}>
         <Paper className={classes.paper}>
@@ -171,19 +166,16 @@ export default function DocumentContainer() {
               </Step>
             ))}
           </Stepper>
-          <React.Fragment>
+          <>
             {activeStep === steps.length ? (
-              <React.Fragment>
+              <>
                 <Typography variant="h5" gutterBottom>
                   Работа с клиентом завершена
                 </Typography>
-                <Typography variant="subtitle1"></Typography>
-              </React.Fragment>
+              </>
             ) : (
-              <React.Fragment>
-                <form
-                  onSubmit={activeStep === 0 ? handleNext : handleSave}
-                >
+              <>
+                <form onSubmit={activeStep === 0 ? handleNext : handleSave}>
                   {getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
@@ -245,23 +237,21 @@ export default function DocumentContainer() {
                         type="submit"
                         variant="contained"
                         color="primary"
-                        onClick={
-                          activeStep === 0 ? null : handleNext
-                        }
+                        onClick={activeStep === 0 ? null : handleNext}
                         className={classes.button}
-                        disabled={state.needChangeForm &&  activeStep !== 0}
+                        disabled={state.needChangeForm && activeStep !== 0}
                       >
                         Дальше
                       </Button>
                     )}
                   </div>
                 </form>
-              </React.Fragment>
+              </>
             )}
-          </React.Fragment>
+          </>
         </Paper>
         <Copyright />
       </main>
-    </React.Fragment>
+    </>
   );
 }

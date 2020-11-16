@@ -8,13 +8,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../context";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   formControl: {
     minWidth: 120,
   },
 }));
 
-export default function Address({ sameAddress }) {
+export default function Address() {
   const classes = useStyles();
 
   const [state, setState] = useContext(AppContext);

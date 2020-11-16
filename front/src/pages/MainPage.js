@@ -218,8 +218,7 @@ const useToolbarStyles = makeStyles((theme) => ({
           color: theme.palette.text.primary,
           backgroundColor: theme.palette.primary.dark,
         },
-  title: {
-  },
+  title: {},
   buttons: {
     display: "flex",
     justifyContent: "flex-end",
@@ -320,7 +319,7 @@ const EnhancedTableToolbar = ({
                   <InputAdornment position="start">
                     <Search />
                   </InputAdornment>
-                )
+                ),
               }}
               onChange={handleSearch}
             />
@@ -406,7 +405,6 @@ export default function MainPage() {
     }));
     fetchForms();
   }, [fetchForms]);
-
 
   rows = createRows(forms);
 

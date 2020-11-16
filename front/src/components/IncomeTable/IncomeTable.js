@@ -4,7 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../context";
-import getRandom from "../../aux/getRandom";
 
 const income = [
   "Основная Зарплата (форма 2НДФЛ)",

@@ -8,7 +8,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppContext } from "../../context";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   formControl: {
     minWidth: 120,
   },
