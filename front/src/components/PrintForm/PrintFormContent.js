@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
   default: {
     margin: 0,
     paddingLeft: "5px",
+    fontFamily:"Roboto",
   },
 }));
 
