@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     paddingLeft: "5px",
     fontFamily:"Roboto",
+    fontSize:"14px",
+    lineHeight:"20px"
   },
 }));
 
