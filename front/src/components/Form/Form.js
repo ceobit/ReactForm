@@ -26,6 +26,7 @@ import CustomTable from "../CustomTable/CustomTable";
 import arrayDebt from "../../data/arrayDebt";
 import arrayBankVisit from "../../data/arrayBankVisit";
 import arrayContactPersons from "../../data/arrayContactPersons";
+import arrayChildren from "../../data/arrayChildren";
 
 const useStyles = makeStyles((theme) => ({
   part: {
@@ -58,14 +59,16 @@ export default function Form() {
 
   const [inputDisabled, setInputDisabled] = useState(false);
 
-  const [childrenCount, setChildrenCount] = useState("");
-  const [childrenArray, setChildrenArray] = useState([]);
-
   const fetchForms = useCallback(async () => {
     try {
-      const data = await request(`/api/form/${state.currentFormId}`, "GET", null, {
-        Authorization: `Bearer${token}`,
-      });
+      const data = await request(
+        `/api/form/${state.currentFormId}`,
+        "GET",
+        null,
+        {
+          Authorization: `Bearer${token}`,
+        }
+      );
 
       setState((state) => ({ ...state, ...data.data, load: true }));
     } catch (e) {
@@ -117,11 +120,21 @@ export default function Form() {
   };
 
   const handleChildrenCount = (event) => {
-    setChildrenCount(event.target.value);
-    setChildrenArray(initializeArrayWithValues(+event.target.value));
-  };
+    setState((prevState) => ({
+      ...prevState,
+      ["childrenArray"]: [],
+      childrenCount: event.target.value
+    }));
 
-  const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val);
+    let i = event.target.value;
+    while (i) {
+      setState((prevState) => ({
+        ...prevState,
+        ["childrenArray"]: [...prevState["childrenArray"], ""],
+      }));
+      i--;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -532,24 +545,20 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={1}>
           <TextField
-            value={childrenCount}
-            type="number"
+            value={state.childrenCount}
+            type="text"
             name="childrenCount"
+            label=""
             fullWidth
             autoComplete="off"
             onChange={handleChildrenCount}
             disabled={inputDisabled}
           />
         </Grid>
-        {console.log(childrenArray)}
-        {childrenArray.map((item, index) => (
-          <ChildrenInfo
-            key={index}
-            idBirthDay={`idBirthDay${index}`}
-            liveTogetherId={`liveTogetherId${index}`}
-            dependenceId={`dependenceId${index}`}
-          />
-        ))}
+        {state.childrenCount !== "" && (
+          <ChildrenInfo stateKey="childrenArray" />
+        )}
+        {/*{state.childrenCount !== "" && <CustomTable tableHeading="Информация о детях" arrayHeading={arrayChildren} stateKey="childrenArray" />}*/}
       </Grid>
       <Typography variant="h6" className={classes.part}>
         Дополнительная информация

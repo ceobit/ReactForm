@@ -83,6 +83,7 @@ export default function CustomTable({ arrayHeading, tableHeading, stateKey }) {
     ));
   };
 
+
   const handleChange = (i, e) => {
     let stateKeyAr = [...state[stateKey]];
     stateKeyAr[i] = e.target.value;

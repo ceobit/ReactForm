@@ -4,9 +4,9 @@ import { AppContext } from "../../context";
 import moment from "moment";
 import getAge from "../../aux/getAge";
 import arrayDebt from "../../data/arrayDebt";
-import arrayBankVisit from '../../data/arrayBankVisit';
-import arrayContactPersons from '../../data/arrayContactPersons';
-import printTable from '../../aux/printTable';
+import arrayBankVisit from "../../data/arrayBankVisit";
+import arrayContactPersons from "../../data/arrayContactPersons";
+import printTable from "../../aux/printTable";
 
 const useStyles = makeStyles((theme) => ({
   default: {
@@ -89,11 +89,24 @@ export default function PrintFormContent() {
                 <strong>Менялись ли ваши фамилия, имя, отчество? </strong>
                 (если да, укажите прежние Ф.И.О. и год изменения)
               </p>
-              <p className={classes.default}>
-                <strong>{state.changedNameCheckBox} </strong>
-              </p>
+              {/*<p className={classes.default}>*/}
+              {/*  <strong>{state.changedNameCheckBox} </strong>*/}
+              {/*</p>*/}
             </td>
           </tr>
+          {state.changedNameCheckBox && (
+            <tr>
+              <td width="342" colSpan="12" valign="top">
+                <p className={classes.default}>{state.oldName}</p>
+              </td>
+              <td width="342" colSpan="12" valign="top">
+                <p className={classes.default}>
+                  {" "}
+                  {moment(state.oldNameDate).format("YYYY")} г.
+                </p>
+              </td>
+            </tr>
+          )}
           <tr>
             <td width="107" colSpan="2" valign="top">
               <p className={classes.default}>
@@ -207,7 +220,8 @@ export default function PrintFormContent() {
                 </p>
                 <p className={classes.default}>
                   <strong>Срок регистрации : с </strong>
-                  {moment(state.tempStartDate).format("DD.MM.YYYY")} <strong> до </strong>
+                  {moment(state.tempStartDate).format("DD.MM.YYYY")}{" "}
+                  <strong> до </strong>
                   {moment(state.tempEndDate).format("DD.MM.YYYY")}
                 </p>
               </td>
@@ -227,20 +241,40 @@ export default function PrintFormContent() {
             </td>
           </tr>
           <tr>
-            <td width="518" colSpan="17" valign="top">
+            <td width="518" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Количество членов семьи: </strong>
                 {state.familyCount},<strong> из них дети: </strong>
                 {state.childrenCount}
               </p>
             </td>
-            <td width="75" colSpan="3" valign="top">
+          </tr>
+          <tr>
+            <td width="75" colSpan="7" valign="top">
+              <p className={classes.default}>Дата рождения</p>
+            </td>
+            <td width="75" colSpan="7" valign="top">
               <p className={classes.default}>Проживает совместно</p>
             </td>
-            <td width="92" colSpan="2" valign="top">
+            <td width="92" colSpan="8" valign="top">
               <p className={classes.default}>На иждивении</p>
             </td>
           </tr>
+          {state["childrenArray"].map((el, i) => {
+            return (
+              <tr>
+                <td width="75" colSpan="7" valign="top">
+                  <p className={classes.default}>{moment(el.childBirthDay).format("DD.MM.YYYY")}</p>
+                </td>
+                <td width="75" colSpan="7" valign="top">
+                  <p className={classes.default}>{el.liveTogether ? "Да" : "Нет"}</p>
+                </td>
+                <td width="92" colSpan="8" valign="top">
+                  <p className={classes.default}>{el.dependence ? "Да" : "Нет"}</p>
+                </td>
+              </tr>
+            );
+          })}
           <tr>
             <td width="684" colSpan="22" valign="top">
               <p>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</p>
@@ -518,7 +552,7 @@ export default function PrintFormContent() {
               <p className={classes.default}>Сумма обращения</p>
             </td>
           </tr>
-          {printTable(state.bankVisit, arrayBankVisit,7)}
+          {printTable(state.bankVisit, arrayBankVisit, 7)}
           <tr>
             <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
@@ -624,7 +658,9 @@ export default function PrintFormContent() {
             </td>
             <td width="344" colSpan="11">
               <p></p>
-              <p className={classes.default}>__________________________________/_________________</p>
+              <p className={classes.default}>
+                __________________________________/_________________
+              </p>
               <p className={classes.default}>ФИО/Подпись</p>
             </td>
           </tr>
