@@ -4,6 +4,7 @@ body {
   /*  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
   /*  sans-serif;*/
   font-family: Roboto sans-serif;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -12,4 +13,5 @@ code {
   /*font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',*/
   /*  monospace;*/
   font-family: Roboto sans-serif;
+  font-size: 14px;
 }
