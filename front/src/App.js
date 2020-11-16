@@ -5,7 +5,6 @@ import { useAuth } from "./hooks/auth.hook";
 import { AuthContext } from "./context/AuthContext";
 import "./App.css";
 
-import DocumentsContainer from "./components/DocumentsContainer/DocumentsContainer";
 import MenuAppBar from "./components/AppBar/AppBar";
 
 function App() {
@@ -30,10 +29,6 @@ function App() {
       </BrowserRouter>
     </AuthContext.Provider>
 
-    // <>
-    // <MenuAppBar />
-    // <DocumentsContainer />
-    // </>
   );
 }
 
