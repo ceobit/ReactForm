@@ -149,7 +149,7 @@ export default function DocumentContainer() {
       } catch (e) {}
       console.log("Submitted up to date", state);
     }
-  }, [state.submit, setState, state.needChangeForm]);
+  }, [state.submit, state.needChangeForm]);
 
   return (
     <>
