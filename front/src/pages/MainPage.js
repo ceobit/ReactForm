@@ -472,14 +472,21 @@ export default function MainPage() {
   //Поиск в таблице
   const handleSearch = (e) => {
     let target = e.target;
+    let result = [];
     if (target.value === "") {
       setForms([...savedStateForm]);
-    } else
-      setForms([
-        ...forms.filter((x) =>
-          x.clientSurname.toLowerCase().includes(target.value.toLowerCase())
-        ),
-      ]);
+    } else {
+      //Поиск по фамилии
+      result = forms.filter((x) =>
+        x.clientSurname.toLowerCase().includes(target.value.toLowerCase())
+      );
+      //Поиск по номеру документа
+      if (result.length === 0) {
+        debugger;
+        result = forms.filter((x) => String(x.formNumber).includes(target.value));
+      }
+      setForms([...result]);
+    }
   };
 
   //Установим признак режима редактирования
