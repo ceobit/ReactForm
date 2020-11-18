@@ -42,7 +42,6 @@ export default function WorkAddress() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
           type="text"
           name="workRegion"
           label="Регион"
@@ -55,7 +54,6 @@ export default function WorkAddress() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
           type="text"
           name="workCity"
           label="Город"
@@ -68,7 +66,6 @@ export default function WorkAddress() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
           type="text"
           name="workStreet"
           label="Улица"
@@ -81,7 +78,6 @@ export default function WorkAddress() {
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
-          required
           type="text"
           name="workHouse"
           label="Дом"

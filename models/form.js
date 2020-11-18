@@ -5,27 +5,21 @@ const formSchema = new mongoose.Schema(
   {
     loanAmount: {
       type: Number,
-      required: true,
     },
     loanPeriod: {
       type: Number,
-      required: true,
     },
     loanGoal: {
       type: String,
-      required: true,
     },
     clientSurname: {
       type: String,
-      required: true,
     },
     clientName: {
       type: String,
-      required: true,
     },
     clientPatronymic: {
       type: String,
-      required: true,
     },
     oldName: {
       type: String,
@@ -248,34 +242,34 @@ const formSchema = new mongoose.Schema(
       type: String,
     },
     income0: {
-      type: Number,
+      type: String,
     },
     income1: {
-      type: Number,
+      type: String,
     },
     income2: {
-      type: Number,
+      type: String,
     },
     income3: {
-      type: Number,
+      type: String,
     },
     incomeSum: {
       type: Number,
     },
     cost0: {
-      type: Number,
+      type: String,
     },
     cost1: {
-      type: Number,
+      type: String,
     },
     cost2: {
-      type: Number,
+      type: String,
     },
     cost3: {
-      type: Number,
+      type: String,
     },
     cost4: {
-      type: Number,
+      type: String,
     },
     costSum: {
       type: Number,
@@ -303,6 +297,9 @@ const formSchema = new mongoose.Schema(
     childrenArray: { type: Array, default: [] },
 
     tempStartDate: {
+      type: String,
+    },
+    workStatementDate: {
       type: String,
     },
     tempEndDate: {

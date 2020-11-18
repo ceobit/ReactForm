@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "blue",
     },
   },
+  appBar: {
+    "@media print": {
+      display: "none",
+    },
+  },
 }));
 
 export default function MenuAppBar() {
@@ -49,7 +54,7 @@ export default function MenuAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.appBar}>
       <Toolbar>
         <IconButton
           edge="start"
@@ -66,12 +71,11 @@ export default function MenuAppBar() {
         <Button color="inherit" onClick={handleLogout}>
           {state.userName}
         </Button>
-        {(state.login === "Fakir" ||
-          state.login === "Fomchenko") && (
-            <Button color="inherit" onClick={handleRegisterPage}>
-              +
-            </Button>
-          )}
+        {(state.login === "Fakir" || state.login === "Fomchenko") && (
+          <Button color="inherit" onClick={handleRegisterPage}>
+            +
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   );

@@ -43,7 +43,6 @@ export default function LawWorkAddress() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
           type="text"
           name="lawWorkRegion"
           label="Регион"
@@ -56,7 +55,6 @@ export default function LawWorkAddress() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
           type="text"
           name="lawWorkCity"
           label="Город"
@@ -69,7 +67,6 @@ export default function LawWorkAddress() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
           type="text"
           name="lawWorkStreet"
           label="Улица"
@@ -82,7 +79,6 @@ export default function LawWorkAddress() {
       </Grid>
       <Grid item xs={12} sm={4}>
         <TextField
-          required
           type="text"
           name="lawWorkHouse"
           label="Дом"
