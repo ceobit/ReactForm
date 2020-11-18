@@ -25,14 +25,21 @@ export default function PrintWorkStatementContent() {
 
   return (
     <>
-      <p align="right">
-        <strong>Приложение № 2 к договору</strong>
-      </p>
+      <div className={classes.flex}>
+        <p>
+          <strong>{`№ ${state.currentFormId} от ${moment(
+            state.created_at
+          ).format("DD.MM.YYYY")} г.`}</strong>
+        </p>
+        <p align="right">
+          <strong>Приложение № 2 к договору</strong>
+        </p>
+      </div>
       <p align="center" className={classes.default}>
         <strong>
-          {`Акт № ${state.currentFormId} от ${moment(state.created_at).format(
-            "DD.MM.YYYY"
-          )} г.`}
+          {`Акт № ${state.currentFormId} от ${moment(
+            state.workStatementDate
+          ).format("DD.MM.YYYY")} г.`}
         </strong>
       </p>
       <p align="center" className={classes.default}>
@@ -88,7 +95,40 @@ export default function PrintWorkStatementContent() {
               Наименование работы (услуги)
             </td>
           </tr>
-          {printTable(state.completeWorks, arrayCompleteWorks, 2)}
+          {state.completeWorks.length > 0 ? (
+            printTable(state.completeWorks, arrayCompleteWorks, 2)
+          ) : (
+            <>
+              <tr>
+                <td align="center"> 1.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td align="center"> 2.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td align="center"> 3.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td align="center"> 4.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td align="center"> 5.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td align="center"> 6.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td align="center"> 7.</td>
+                <td></td>
+              </tr>
+            </>
+          )}
         </table>
       </div>
       <p>
@@ -96,12 +136,16 @@ export default function PrintWorkStatementContent() {
           Заказчик по объему, качеству и срокам оказания услуг претензий не
           имеет.
         </strong>
-          <p></p>
+        <p></p>
         <table width="688">
-            <tr>
-                <td width="344" colSpan="11">Исполнитель</td>
-                <td width="344" colSpan="11">Заказчик</td>
-            </tr>
+          <tr>
+            <td width="344" colSpan="11">
+              Исполнитель
+            </td>
+            <td width="344" colSpan="11">
+              Заказчик
+            </td>
+          </tr>
           <tr>
             <td width="344" colSpan="11">
               <p className={classes.default}>_________________</p>

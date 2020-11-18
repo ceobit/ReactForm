@@ -803,7 +803,7 @@ export default function Form() {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl required className={classes.formControl}>
+          <FormControl className={classes.formControl}>
             <Select
               labelId="labelWorkerCountId"
               name="workerCount"
@@ -828,7 +828,7 @@ export default function Form() {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormControl required className={classes.formControl}>
+          <FormControl className={classes.formControl}>
             <Select
               labelId="labelWorkTimeId"
               id="selectWorkTimeId"

@@ -39,34 +39,9 @@ export default function IncomeTable() {
   const [state, setState] = useContext(AppContext);
   const [inputDisabled, setInputDisabled] = useState(false);
 
-  const value0 = useRef("");
-  const value1 = useRef("");
-  const value2 = useRef("");
-  const value3 = useRef("");
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setState((prev) => ({ ...prev, ...{ [name]: value } }));
-  };
-
-  const incomeCalculation = () => {
-    const income0 = +value0.current.value;
-    const income1 = +value1.current.value;
-    const income2 = +value2.current.value;
-    const income3 = +value3.current.value;
-
-    let sum = income0 + income1 + income2 + income3;
-
-    setState((prev) => ({
-      ...prev,
-      ...{
-        ["incomeSum"]: sum,
-        ["income0"]: income0,
-        ["income1"]: income1,
-        ["income2"]: income2,
-        ["income3"]: income3,
-      },
-    }));
   };
 
   useEffect(() => {
@@ -109,49 +84,18 @@ export default function IncomeTable() {
             <Grid key={index} item xs={12} sm={4} className={classes.table}>
               <TextField
                 key={index}
-                type="number"
                 variant="outlined"
-                inputRef={eval(`value${index}`)}
+                name={`income${index}`}
                 size="small"
                 fullWidth
-                label="Сумма"
                 value={eval(`state.income${index}`)}
-                onChange={() => {
-                  incomeCalculation();
-                }}
+                onChange={handleInputChange}
                 disabled={inputDisabled}
               />
             </Grid>
           </>
         );
       })}
-      <Grid item xs={12} sm={8} className={classes.table}>
-        <TextField
-          variant="outlined"
-          defaultValue="Итого:"
-          InputProps={{
-            readOnly: true,
-          }}
-          size="small"
-          margin="none"
-          fullWidth
-        />
-      </Grid>
-      <Grid item xs={12} sm={4} className={classes.table}>
-        <TextField
-          type="number"
-          variant="outlined"
-          size="small"
-          fullWidth
-          label="Сумма"
-          name="incomeSum"
-          value={state.incomeSum}
-          InputProps={{
-            readOnly: true,
-          }}
-          disabled={inputDisabled}
-        />
-      </Grid>
       <Grid item xs={12}>
         <TextField
           type="number"

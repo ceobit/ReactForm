@@ -12,6 +12,23 @@ const useStyles = makeStyles(() => ({
   default: {
     margin: 0,
     paddingLeft: "5px",
+    "@media print": {
+      pageBreakAfter: "auto",
+      pageBreakInside: "avoid",
+    },
+  },
+
+  tableBreak: {
+    "@media print": {
+      pageBreakInside: "auto"
+    }
+  },
+
+  pageBreak: {
+    "@media print": {
+      pageBreakAfter: "auto",
+      pageBreakInside: "avoid",
+    },
   },
 }));
 
@@ -43,6 +60,7 @@ export default function PrintFormContent() {
         cellPadding="0"
         align="center"
         width="688"
+        className={classes.tableBreak}
       >
         <tbody>
           <tr>
@@ -227,7 +245,7 @@ export default function PrintFormContent() {
               </td>
             </tr>
           )}
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p>СВЕДЕНИЯ О СЕМЬЕ</p>
             </td>
@@ -240,7 +258,7 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="518" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Количество членов семьи: </strong>
@@ -249,7 +267,7 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="75" colSpan="7" valign="top">
               <p className={classes.default}>Дата рождения</p>
             </td>
@@ -260,17 +278,23 @@ export default function PrintFormContent() {
               <p className={classes.default}>На иждивении</p>
             </td>
           </tr>
-          {state["childrenArray"].map(el => {
+          {state["childrenArray"].map((el) => {
             return (
-              <tr>
+              <tr className={classes.pageBreak}>
                 <td width="75" colSpan="7" valign="top">
-                  <p className={classes.default}>{moment(el.childBirthDay).format("DD.MM.YYYY")}</p>
+                  <p className={classes.default}>
+                    {moment(el.childBirthDay).format("DD.MM.YYYY")}
+                  </p>
                 </td>
                 <td width="75" colSpan="7" valign="top">
-                  <p className={classes.default}>{el.liveTogether ? "Да" : "Нет"}</p>
+                  <p className={classes.default}>
+                    {el.liveTogether ? "Да" : "Нет"}
+                  </p>
                 </td>
                 <td width="92" colSpan="8" valign="top">
-                  <p className={classes.default}>{el.dependence ? "Да" : "Нет"}</p>
+                  <p className={classes.default}>
+                    {el.dependence ? "Да" : "Нет"}
+                  </p>
                 </td>
               </tr>
             );
@@ -280,7 +304,7 @@ export default function PrintFormContent() {
               <p>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Отношение к воинской службе:</strong>{" "}
@@ -288,7 +312,7 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p align="left" className={classes.default}>
                 <strong>Судимости</strong>: {state.criminalStatus}
@@ -298,12 +322,12 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p>ИНФОРМАЦИЯ ОБ ОБРАЗОВАНИИ</p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Образование: </strong>
@@ -311,12 +335,12 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p>ИНФОРМАЦИЯ О ТРУДОУСТРОЙСТВЕ</p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Работа по трудовому договору/контракту: </strong>
@@ -324,7 +348,7 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Название компании/организации : </strong>{" "}
@@ -361,7 +385,7 @@ export default function PrintFormContent() {
               )}
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="308" colSpan="9" valign="top">
               <p className={classes.default}>
                 <strong>Количество сотрудников в компании: </strong>{" "}
@@ -379,12 +403,12 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
               <p>ИНФОРМАЦИЯ О ДОХОДАХ/РАСХОДАХ</p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="276" colSpan="6" valign="top" align="center">
               <p className={classes.default}>
                 <strong>Ежемесячные доходы</strong>
@@ -406,7 +430,7 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="276" colSpan="6" valign="top">
               <p className={classes.default}>
                 Основная Зарплата (после уплаты налогов) форма 2НДФЛ
@@ -422,7 +446,7 @@ export default function PrintFormContent() {
               <p className={classes.default}>{state.cost0}</p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="276" colSpan="6" valign="top">
               <p className={classes.default}>
                 Доход от сдачи в аренду недвижимости (после уплаты налогов)
@@ -438,7 +462,7 @@ export default function PrintFormContent() {
               <p className={classes.default}>{state.cost1}</p>
             </td>
           </tr>
-          <tr>
+          <tr className={classes.pageBreak}>
             <td width="276" colSpan="6" valign="top">
               <p className={classes.default}>Алименты</p>
             </td>
@@ -470,13 +494,9 @@ export default function PrintFormContent() {
           </tr>
           <tr>
             <td width="276" colSpan="6" valign="top">
-              <p className={classes.default}>
-                <strong>Итого:</strong>
-              </p>
+              <p className={classes.default}></p>
             </td>
-            <td width="88" colSpan="7" valign="top">
-              <p className={classes.default}>{state.incomeSum}</p>
-            </td>
+            <td width="88" colSpan="7" valign="top"></td>
             <td width="227" colSpan="6" valign="top">
               <p className={classes.default}>Страхование</p>
             </td>
@@ -485,20 +505,11 @@ export default function PrintFormContent() {
             </td>
           </tr>
           <tr>
-            <td width="276" colSpan="6" valign="top">
+            <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Среднемесячный доход семьи:</strong>{" "}
                 {state.averageIncome}
               </p>
-            </td>
-            <td width="88" colSpan="7" valign="top"></td>
-            <td width="227" colSpan="6" valign="top">
-              <p className={classes.default}>
-                <strong>Итого:</strong>
-              </p>
-            </td>
-            <td width="94" colSpan="3" valign="top">
-              <p className={classes.default}>{state.costSum}</p>
             </td>
           </tr>
           <tr>
@@ -533,7 +544,6 @@ export default function PrintFormContent() {
                 Ежемесячная сумма погашения (руб.)
               </p>
             </td>
-            {/*<td width="4" colSpan="1"></td>*/}
           </tr>
           {printTable(state.debt, arrayDebt, 5)}
           <tr>
