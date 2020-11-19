@@ -19,6 +19,7 @@ const useStyles = makeStyles(() => ({
   },
   wrapper: {
     margin: "10px",
+    fontSize: "12px",
   },
 }));
 
@@ -196,7 +197,7 @@ export default function PrintContractContent() {
       </p>
       <p className={classes.default}>
         1. Консультирование и информационное сопровождение в соответствии с
-        разделом «Права и обязанности исполнителя
+        разделом «Права и обязанности исполнителя»
       </p>
       <p className={classes.default}>
         2. Абонентское сопровождение процедуры подписания кредитного договора с
@@ -218,7 +219,7 @@ export default function PrintContractContent() {
         3-х дней с момента получения положительного решения Банка о выдаче
         кредита, но не позднее момента получения наличных средств в том числе в
         виде электронного перевода) при этом стоимость услуг установлена
-        сторонами
+        сторонами в размере
         <strong> {state.costSecondStep} рублей</strong>. Услуги, оказываемые на
         этапе №2, представляют собой абонентское обслуживание в целях помощи в
         оформлении необходимых документов при получении кредитных денежных
@@ -299,6 +300,8 @@ export default function PrintContractContent() {
         этом случае Акт о приемке оказанных услуг считается подписанным
         Клиентом.
       </p>
+       <br/>
+       <br/>
       <p className={classes.heading}>
         <strong>Досрочное расторжение договора.</strong>
       </p>
@@ -417,7 +420,7 @@ export default function PrintContractContent() {
               <p className={classes.default}>тел. +79233410100, +79233410300</p>
               <p className={classes.default}>Фомченко И.Е</p>
             </td>
-              <td width="120"></td>
+            <td width="120"></td>
             <td width="300" valign="top">
               <p>
                 <strong>Заказчик:</strong>
@@ -442,7 +445,7 @@ export default function PrintContractContent() {
             <td width="300">
               <p>Подпись ______________________/</p>
             </td>
-              <td width="120"></td>
+            <td width="120"></td>
             <td width="300">
               <p>Подпись ______________________/</p>
             </td>
