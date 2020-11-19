@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
   wrapper: {
     margin: "10px",
-    fontSize: "10px",
+    fontSize: "12px",
   },
 }));
 
