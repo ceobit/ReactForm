@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
   },
   wrapper: {
-    margin: "10px",
+    margin: "5px",
     fontSize: "12px",
   },
 }));
