@@ -8,6 +8,10 @@ const useStyles = makeStyles(() => ({
     margin: 0,
     padding: 0,
   },
+  footer: {
+    marginBottom: 0,
+    paddingBottom: 0,
+  },
   heading: {
     margin: "0 0 0 0",
     padding: 0,
@@ -394,7 +398,7 @@ export default function PrintContractContent() {
         <tbody>
           <tr>
             <td width="300" valign="top">
-              <p>
+              <p className={classes.footer}>
                 <strong>Исполнитель: </strong>
               </p>
               <p className={classes.default}>ИП Фомченко Иван Евгеньевич</p>
@@ -420,7 +424,7 @@ export default function PrintContractContent() {
             </td>
             <td width="120"></td>
             <td width="300" valign="top">
-              <p>
+              <p className={classes.footer}>
                 <strong>Заказчик:</strong>
               </p>
               <p
