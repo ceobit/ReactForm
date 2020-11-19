@@ -22,8 +22,8 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
   },
   wrapper: {
-    margin: "5px",
-    fontSize: "12px",
+    margin: "10px",
+    fontSize: "10px",
   },
 }));
 
