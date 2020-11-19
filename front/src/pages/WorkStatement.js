@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import Calendar from '../components/Calendar/Calendar';
 import {makeStyles} from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   part: {
