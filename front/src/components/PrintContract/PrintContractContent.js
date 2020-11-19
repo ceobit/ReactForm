@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
     padding: 0,
   },
   heading: {
-    margin: "10px 0 0 0",
+    margin: "0 0 0 0",
     padding: 0,
   },
 
@@ -300,8 +300,6 @@ export default function PrintContractContent() {
         этом случае Акт о приемке оказанных услуг считается подписанным
         Клиентом.
       </p>
-       <br/>
-       <br/>
       <p className={classes.heading}>
         <strong>Досрочное расторжение договора.</strong>
       </p>
