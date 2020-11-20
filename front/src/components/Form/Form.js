@@ -497,10 +497,10 @@ export default function Form() {
               <MenuItem value="">
                 <em>-</em>
               </MenuItem>
-              <MenuItem value={10}>
+              <MenuItem value={state.sex === "Мужской" ? "Женат" : "Замужем"}>
                 {state.sex === "Мужской" ? "Женат" : "Замужем"}
               </MenuItem>
-              <MenuItem value={20}>
+              <MenuItem value={state.sex === "Мужской" ? "Холост" : "Не замужем"}>
                 {state.sex === "Мужской" ? "Холост" : "Не замужем"}
               </MenuItem>
               <MenuItem value={"В разводе"}>В разводе</MenuItem>
