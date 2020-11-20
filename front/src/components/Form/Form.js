@@ -12,7 +12,7 @@ import Select from "@material-ui/core/Select";
 import Calendar from "../Calendar/Calendar";
 import ResidenceAddress from "../Address/ResidenceAddress";
 import Address from "../Address/Address";
-import ChildrenInfo from "../ChildrenInfo/ChildrenInfo";
+// import ChildrenInfo from "../ChildrenInfo/ChildrenInfo";
 import { AppContext } from "../../context";
 import IncomeTable from "../IncomeTable/IncomeTable";
 import ChangedName from "../ChangedName/ChangedName";

@@ -9,6 +9,7 @@ const routers = require('./routers');
 const { NotFoundError } = require('./errors/errors');
 const { ResourceNotFoundMessage } = require('./errors/errorsMessages');
 const errorsHandler = require('./middlewares/errorsHandler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT, dbURI } = require('./config');
 
@@ -48,10 +49,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
+//  логгер запросов
+app.use(requestLogger);
+
 app.use('/', routers);
 app.use('*', () => {
   throw new NotFoundError(ResourceNotFoundMessage);
 });
+
+// логгер ошибок
+// app.use(errorLogger);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'front', 'build')));
@@ -62,6 +69,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //  Обработчик ошибок celebrate
-app.use(errors());
+// app.use(errors());
 
 app.use(errorsHandler);
