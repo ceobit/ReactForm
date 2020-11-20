@@ -20,8 +20,8 @@ const useStyles = makeStyles(() => ({
 
   tableBreak: {
     "@media print": {
-      pageBreakInside: "auto"
-    }
+      pageBreakInside: "auto",
+    },
   },
 
   pageBreak: {
@@ -254,10 +254,15 @@ export default function PrintFormContent() {
             <td width="684" colSpan="22" valign="top">
               <p className={classes.default}>
                 <strong>Семейное положение: </strong>
-                  {state.sex === "Мужской" && state.familyStatus === "10" ? "Женат":null}
-                  {state.sex === "Мужской" && state.familyStatus === "20" ? "Холост":null}
-                  {state.sex === "Женский" && state.familyStatus === "10" ? "Замужем":null}
-                  {state.sex === "Женский" && state.familyStatus === "20" ? "Не замужем":null}
+                {state.sex === "Мужской" && state.familyStatus === "10"
+                  ? "Женат"
+                  : state.sex === "Мужской" && state.familyStatus === "20"
+                  ? "Холост"
+                  : state.sex === "Женский" && state.familyStatus === "10"
+                  ? "Замужем"
+                  : state.sex === "Женский" && state.familyStatus === "20"
+                  ? "Не замужем"
+                  : state.familyStatus}
               </p>
             </td>
           </tr>
