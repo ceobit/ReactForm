@@ -275,7 +275,6 @@ export default function Form() {
             label="Гражданство"
             fullWidth
             autoComplete="off"
-            defaultValue="Россия"
             onChange={handleInputChange}
             disabled={inputDisabled}
           />

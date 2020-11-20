@@ -6,11 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 import { AppContextProvider } from "./context";
 
 ReactDOM.render(
-  <React.StrictMode>
+  //  Убираю строгий режим, чтобы не сыпались ошибки во время разработки из-за устаревших методов material-ui
+  // <React.StrictMode>
     <AppContextProvider>
       <App />
-    </AppContextProvider>
-  </React.StrictMode>,
+    </AppContextProvider>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 
