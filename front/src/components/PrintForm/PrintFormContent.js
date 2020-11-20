@@ -36,17 +36,6 @@ export default function PrintFormContent() {
   const classes = useStyles();
   const [state, setState] = useContext(AppContext);
 
-  let familyStatus = state.familyStatus;
-  if (state.sex === "Мужской" && state.familyStatus === "10") {
-    familyStatus = "Женат";
-  } else if (state.sex === "Женский" && state.familyStatus === "10") {
-    familyStatus = "Замужем";
-  } else if (state.sex === "Мужской" && state.familyStatus === "20") {
-    familyStatus = "Холост";
-  } else if (state.sex === "Женский" && state.familyStatus === "20") {
-    familyStatus = "Не замужем";
-  }
-
   return (
     <>
       <p align="center">

@@ -138,16 +138,19 @@ export default function DocumentContainer() {
         const data = await request(`/api/form${id}`, "POST", state, {
           Authorization: `Bearer${token}`,
         });
-        setState((state) => {
+         setState((state) => {
           return {
             ...state,
             submit: false,
+            pullData: false,
             currentFormId: data.data.formNumber,
             needChangeForm: false,
           };
         });
-      } catch (e) {}
-      console.log("Submitted up to date", state);
+        console.log("Сохранение данных в базе данных выполнено", state);
+      } catch (e) {
+        console.log("Сохранение данных в базе данных НЕ выполнено", state);
+      }
     }
   }, [state.submit, state.needChangeForm]);
 
@@ -182,7 +185,11 @@ export default function DocumentContainer() {
                       <>
                         <Button
                           className={classes.button}
-                          type="submit"
+                          type={
+                            state.currentFormId === "" || state.needChangeForm
+                              ? "submit"
+                              : "button"
+                          }
                           id="btnForm"
                           variant="contained"
                           color="primary"
@@ -199,7 +206,11 @@ export default function DocumentContainer() {
                         </Button>
                         {state.currentFormId !== "" && !state.needChangeForm && (
                           <Button
-                            type="submit"
+                            type={
+                              state.currentFormId === "" || state.needChangeForm
+                                ? "submit"
+                                : "button"
+                            }
                             className={classes.button}
                             id="btnContract"
                             variant="contained"

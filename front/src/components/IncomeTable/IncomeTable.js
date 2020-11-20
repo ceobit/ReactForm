@@ -67,10 +67,16 @@ export default function IncomeTable() {
       </Grid>
       {income.map((item, index) => {
         return (
-          <>
-            <Grid key={index} item xs={12} sm={8} className={classes.table}>
+          <React.Fragment key={index}>
+            <Grid
+              key={`g_${index}`}
+              item
+              xs={12}
+              sm={8}
+              className={classes.table}
+            >
               <TextField
-                key={index}
+                key={`tf_${index}`}
                 variant="outlined"
                 defaultValue={item}
                 InputProps={{
@@ -81,9 +87,15 @@ export default function IncomeTable() {
                 fullWidth
               />
             </Grid>
-            <Grid key={index} item xs={12} sm={4} className={classes.table}>
+            <Grid
+              key={`g1_${index}`}
+              item
+              xs={12}
+              sm={4}
+              className={classes.table}
+            >
               <TextField
-                key={index}
+                key={`tf1_${index}`}
                 variant="outlined"
                 name={`income${index}`}
                 size="small"
@@ -93,7 +105,7 @@ export default function IncomeTable() {
                 disabled={inputDisabled}
               />
             </Grid>
-          </>
+          </React.Fragment>
         );
       })}
       <Grid item xs={12}>

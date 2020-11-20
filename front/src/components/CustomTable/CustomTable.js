@@ -53,10 +53,16 @@ export default function CustomTable({ arrayHeading, tableHeading, stateKey }) {
 
   const createInput = () => {
     return state[stateKey].map((el, i) => (
-      <>
-        <Grid key={i} item xs={12} sm={widthCells} className={classes.table}>
+      <React.Fragment key={i}>
+        <Grid
+          key={`g_${i}`}
+          item
+          xs={12}
+          sm={widthCells}
+          className={classes.table}
+        >
           <TextField
-            key={i}
+            key={`tf_${i}`}
             variant="outlined"
             value={el || ""}
             size="small"
@@ -67,9 +73,9 @@ export default function CustomTable({ arrayHeading, tableHeading, stateKey }) {
           />
         </Grid>
         {(i + 1) % arrayHeading.length === 0 && (
-          <Grid key={i} item xs={12} sm={12} className={classes.table}>
+          <Grid key={`g2_${i}`} item xs={12} sm={12} className={classes.table}>
             <Button
-              key={i}
+              key={`tf2_${i}`}
               variant="outlined"
               color="primary"
               onClick={(e) => removeClick(i, e)}
@@ -79,10 +85,9 @@ export default function CustomTable({ arrayHeading, tableHeading, stateKey }) {
             </Button>
           </Grid>
         )}
-      </>
+      </React.Fragment>
     ));
   };
-
 
   const handleChange = (i, e) => {
     let stateKeyAr = [...state[stateKey]];

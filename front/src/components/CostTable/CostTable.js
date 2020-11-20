@@ -49,7 +49,7 @@ export default function CostTable() {
     if (state.pullData) {
       setState((state) => {
         return {
-          ...state
+          ...state,
         };
       });
     }
@@ -68,16 +68,16 @@ export default function CostTable() {
       </Grid>
       {cost.map((item, index) => {
         return (
-          <>
+          <React.Fragment key={index}>
             <Grid
-              key={index}
+              key={`g_${index}`}
               item
               xs={12}
               sm={8}
               className={classes.table}
             >
               <TextField
-                key={index}
+                key={`tf_${index}`}
                 variant="outlined"
                 defaultValue={item}
                 InputProps={{
@@ -89,14 +89,14 @@ export default function CostTable() {
               />
             </Grid>
             <Grid
-              key={index}
+              key={`g1_${index}`}
               item
               xs={12}
               sm={4}
               className={classes.table}
             >
               <TextField
-                key={index}
+                key={`tf1_${index}`}
                 variant="outlined"
                 name={`cost${index}`}
                 size="small"
@@ -106,7 +106,7 @@ export default function CostTable() {
                 disabled={inputDisabled}
               />
             </Grid>
-          </>
+          </React.Fragment>
         );
       })}
     </>
