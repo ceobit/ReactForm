@@ -550,14 +550,15 @@ export default function Form() {
             label=""
             fullWidth
             autoComplete="off"
-            onChange={handleChildrenCount}
+            onChange={handleInputChange}
             disabled={inputDisabled}
           />
         </Grid>
-        {state.childrenCount !== "" && (
-          <ChildrenInfo stateKey="childrenArray" />
-        )}
-        {/*{state.childrenCount !== "" && <CustomTable tableHeading="Информация о детях" arrayHeading={arrayChildren} stateKey="childrenArray" />}*/}
+
+        {/*  Убрал по желанию заказчика, думаю функционал далеко не убирать*/}
+        {/*{state.childrenCount !== "" && (*/}
+        {/*  <ChildrenInfo stateKey="childrenArray" />*/}
+        {/*)}*/}
       </Grid>
       <Typography variant="h6" className={classes.part}>
         Дополнительная информация
