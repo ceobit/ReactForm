@@ -8,7 +8,7 @@ import "./App.css";
 import MenuAppBar from "./components/AppBar/AppBar";
 
 function App() {
-  const { token, login, logout, userId, ready } = useAuth();
+  const { token, login, logout, userId } = useAuth();
   const isAuthenticated = !!token;
   const routes = useRoutes(isAuthenticated);
   return (
