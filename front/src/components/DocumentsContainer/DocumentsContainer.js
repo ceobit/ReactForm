@@ -8,7 +8,7 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-import Form from "../Form/Form";
+import Form from "../../pages/Form";
 import Contract from "../../pages/Contract";
 import WorkStatement from "../../pages/WorkStatement";
 import { useHttp } from "../../hooks/http.hook";
