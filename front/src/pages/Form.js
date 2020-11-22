@@ -403,7 +403,16 @@ export default function Form() {
             Адрес постоянной регистрации:
           </Typography>
         </Grid>
-        <ResidenceAddress data={state} />
+        <Address
+          addressType="residenceAddressType"
+          postcode="residencePostcode"
+          region="residenceRegion"
+          city="residenceCity"
+          street="residenceStreet"
+          house="residenceHouse"
+          flat="residenceFlat"
+          cas="residenceCase"
+        />
         <Grid item xs={12} className={classes.gridSubtitle}>
           <Typography variant="subtitle1">
             Адрес фактического проживания:
@@ -425,7 +434,16 @@ export default function Form() {
         </Grid>
         {/*Фактический адрес показываем в зависимости от установленного значения sameAddress*/}
         {!state.sameAddressCheckBox && (
-          <Address sameAddress={state.sameAddressCheckBox} />
+          <Address
+            addressType="addressType"
+            postcode="postcode"
+            region="region"
+            city="city"
+            street="street"
+            house="house"
+            flat="flat"
+            cas="cas"
+          />
         )}
         <Grid item xs={12}>
           <TextField
@@ -457,7 +475,16 @@ export default function Form() {
         {/*Временный адрес показываем в зависимости от установленного значения sameAddress*/}
         {state.tempAddressCheckBox && (
           <>
-            <TempAddress />
+            <Address
+              addressType="tempAddressType"
+              postcode="tempPostcode"
+              region="tempRegion"
+              city="tempCity"
+              street="tempStreet"
+              house="tempHouse"
+              flat="tempFlat"
+              cas="tempCase"
+            />
             <Grid item xs={12} sm={4}>
               <Typography variant="subtitle1">Срок регистрации:</Typography>
             </Grid>
@@ -500,7 +527,9 @@ export default function Form() {
               <MenuItem value={state.sex === "Мужской" ? "Женат" : "Замужем"}>
                 {state.sex === "Мужской" ? "Женат" : "Замужем"}
               </MenuItem>
-              <MenuItem value={state.sex === "Мужской" ? "Холост" : "Не замужем"}>
+              <MenuItem
+                value={state.sex === "Мужской" ? "Холост" : "Не замужем"}
+              >
                 {state.sex === "Мужской" ? "Холост" : "Не замужем"}
               </MenuItem>
               <MenuItem value={"В разводе"}>В разводе</MenuItem>
@@ -553,7 +582,6 @@ export default function Form() {
             disabled={inputDisabled}
           />
         </Grid>
-
         {/*  Убрал по желанию заказчика, думаю функционал далеко не убирать*/}
         {/*{state.childrenCount !== "" && (*/}
         {/*  <ChildrenInfo stateKey="childrenArray" />*/}
@@ -735,7 +763,16 @@ export default function Form() {
             Юридический адрес компании/организации
           </Typography>
         </Grid>
-        <LawWorkAddress />
+        <Address
+          postcode="lawWorkPostcode"
+          region="lawWorkRegion"
+          city="lawWorkCity"
+          street="lawWorkStreet"
+          house="lawWorkHouse"
+          flat="lawWorkOffice"
+          cas="lawWorkCase"
+          work={true}
+        />
         <Grid item xs={12} className={classes.gridSubtitle}>
           <Typography variant="subtitle1">
             Фактический адрес компании/организации:
@@ -755,48 +792,18 @@ export default function Form() {
             label="Совпадает с юридическим адресом"
           />
         </Grid>
-        {!state.sameWorkAddressCheckBox && <WorkAddress />}
-        {/*<Grid item xs={12} className={classes.gridSubtitle}>*/}
-        {/*  <Typography variant="subtitle1">*/}
-        {/*    Сведения о работе супруги(а)*/}
-        {/*  </Typography>*/}
-        {/*</Grid>*/}
-        {/*<Grid item xs={12}>*/}
-        {/*  <TextField*/}
-        {/*    type="text"*/}
-        {/*    id="partnerCompanyName"*/}
-        {/*    name="partnerCompanyName"*/}
-        {/*    label="Название компании/организации"*/}
-        {/*    fullWidth*/}
-        {/*    autoComplete="off"*/}
-        {/*  />*/}
-        {/*</Grid>*/}
-        {/*<Grid item xs={12} sm={6}>*/}
-        {/*  <TextField*/}
-        {/*    type="text"*/}
-        {/*    id="partnerCompanyDepartment"*/}
-        {/*    name="partnerCompanyDepartment"*/}
-        {/*    label="Подразделение"*/}
-        {/*    fullWidth*/}
-        {/*    autoComplete="off"*/}
-        {/*  />*/}
-        {/*</Grid>*/}
-        {/*<Grid item xs={12} sm={6}>*/}
-        {/*  <TextField*/}
-        {/*    type="text"*/}
-        {/*    id="partnerCompanyPosition"*/}
-        {/*    name="companyPosition"*/}
-        {/*    label="Должность"*/}
-        {/*    fullWidth*/}
-        {/*    autoComplete="off"*/}
-        {/*  />*/}
-        {/*</Grid>*/}
-        {/*<Grid item xs={12} className={classes.gridSubtitle}>*/}
-        {/*  <Typography variant="subtitle1">*/}
-        {/*    Адрес компании/организации*/}
-        {/*  </Typography>*/}
-        {/*</Grid>*/}
-        {/*<WorkAddress />*/}
+        {!state.sameWorkAddressCheckBox && (
+          <Address
+            postcode="workPostcode"
+            region="workRegion"
+            city="workCity"
+            street="workStreet"
+            house="workHouse"
+            flat="workOffice"
+            cas="workCase"
+            work={true}
+          />
+        )}
         <Grid item xs={12} sm={6} className={classes.gridSubtitle}>
           <Typography variant="subtitle1">
             Количество сотрудников в компании:

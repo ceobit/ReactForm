@@ -202,7 +202,7 @@ export default function PrintFormContent() {
               {!state.sameAddressCheckBox ? (
                 <p className={classes.default}>
                   {`Индекс: ${state.postcode} ${state.region} г. ${state.city} ул. ${state.street}
-                д. ${state.house} корпус ${state.case} кв. ${state.flat}`}
+                д. ${state.house} корпус ${state.cas} кв. ${state.flat}`}
                 </p>
               ) : (
                 <p className={classes.default}>
