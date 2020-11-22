@@ -94,7 +94,7 @@ export default function Address({
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
+          required={!work}
           type="text"
           name={region}
           label="Регион"
@@ -107,7 +107,7 @@ export default function Address({
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
+          required={!work}
           type="text"
           name={city}
           label="Город"
@@ -120,7 +120,7 @@ export default function Address({
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          required
+          required={!work}
           type="text"
           name={street}
           label="Улица"
@@ -133,7 +133,7 @@ export default function Address({
       </Grid>
       <Grid item xs={12} sm={work ? 4 : 2}>
         <TextField
-          required
+          required={!work}
           type="text"
           name={house}
           label="Дом"
