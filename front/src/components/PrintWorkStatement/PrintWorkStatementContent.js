@@ -15,8 +15,17 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
   },
   table: {
-    margin: "15px 50px",
+    marginTop: "30px",
+    marginBottom: "30px"
   },
+
+  td: {
+    paddingTop: "20px",
+  },
+
+    mainText: {
+      fontSize: "12px"
+    }
 }));
 
 export default function PrintWorkStatementContent() {
@@ -48,50 +57,52 @@ export default function PrintWorkStatementContent() {
       <p align="center" className={classes.default}>
         <strong>(оказанных услуг)</strong>
       </p>
-      <p className={classes.default}>Исполнитель: ИП Фомченко И.Е</p>
-      <p align="center" className={classes.default}>
-        Заказчик:{" "}
-        {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}
-      </p>
-      <p className={classes.default}>
-        В рамках оказания информационных услуг Исполнитель предоставил Заказчику
-        информацию о банках:
-      </p>
-      <p>
-        1. Оказал устную консультацию по общим основаниям, правилам и процедурам
-        предоставления кредита.
-      </p>
-      <p className={classes.default}>
-        2. Оказал Клиенту консультацию об основных возможных причинах отказа в
-        предоставлении Банками кредитов Клиенту на основе анализа Анкеты
-        Клиента.
-      </p>
-      <p>
-        3. Оказал Клиенту консультацию – рекомендации по заполнению заявления в
-        Банк указанный в пункте 5 настоящего Акта для получения кредита для
-        целей указанных в Приложении №1 к договору.
-      </p>
-      <p className={classes.default}>
-        4. Оказал Клиенту устные консультации по способам обеспечения исполнения
-        обязательств Клиента перед Банком по возврату кредита для получения
-        кредита для целей указанных в Приложении №1 к договору.
-      </p>
-      <p>
-        5. Оказал Клиенту устные консультации по правилам и условиям страхования
-        ответственности заемщиков, разъяснил правила возврата страховой премии в
-        «период охлаждения».
-      </p>
-      <p className={classes.default}>
-        6. Произвел подбор Банка, предоставляющего кредиты на условиях,
-        установленных в Анкете Клиента (Приложение №1) к настоящему договору.
-      </p>
+      <div className={classes.mainText}>
+        <p className={classes.default}>Исполнитель: ИП Фомченко И.Е</p>
+        <p align="center" className={classes.default}>
+          Заказчик:{" "}
+          {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}
+        </p>
+        <p className={classes.default}>
+          В рамках оказания информационных услуг Исполнитель предоставил
+          Заказчику информацию о банках:
+        </p>
+        <p>
+          1. Оказал устную консультацию по общим основаниям, правилам и
+          процедурам предоставления кредита.
+        </p>
+        <p className={classes.default}>
+          2. Оказал Клиенту консультацию об основных возможных причинах отказа в
+          предоставлении Банками кредитов Клиенту на основе анализа Анкеты
+          Клиента.
+        </p>
+        <p>
+          3. Оказал Клиенту консультацию – рекомендации по заполнению заявления
+          в Банк указанный в пункте 5 настоящего Акта для получения кредита для
+          целей указанных в Приложении №1 к договору.
+        </p>
+        <p className={classes.default}>
+          4. Оказал Клиенту устные консультации по способам обеспечения
+          исполнения обязательств Клиента перед Банком по возврату кредита для
+          получения кредита для целей указанных в Приложении №1 к договору.
+        </p>
+        <p>
+          5. Оказал Клиенту устные консультации по правилам и условиям
+          страхования ответственности заемщиков, разъяснил правила возврата
+          страховой премии в «период охлаждения».
+        </p>
+        <p className={classes.default}>
+          6. Произвел подбор Банка, предоставляющего кредиты на условиях,
+          установленных в Анкете Клиента (Приложение №1) к настоящему договору.
+        </p>
+      </div>
       <div className={classes.table}>
-        <table border="1" cellSpacing="0" cellPadding="0" width="600">
-          <tr>
+        <table border="1" cellSpacing="0" cellPadding="0" width="688">
+          <tr height="40">
             <td width="50" align="center">
               №
             </td>
-            <td width="550" align="center">
+            <td width="638" align="center">
               Наименование работы (услуги)
             </td>
           </tr>
@@ -99,31 +110,31 @@ export default function PrintWorkStatementContent() {
             printTable(state.completeWorks, arrayCompleteWorks, 2)
           ) : (
             <>
-              <tr>
+              <tr height="40">
                 <td align="center"> 1.</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr height="40">
                 <td align="center"> 2.</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr height="40">
                 <td align="center"> 3.</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr height="40">
                 <td align="center"> 4.</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr height="40">
                 <td align="center"> 5.</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr height="40">
                 <td align="center"> 6.</td>
                 <td></td>
               </tr>
-              <tr>
+              <tr height="40">
                 <td align="center"> 7.</td>
                 <td></td>
               </tr>
