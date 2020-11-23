@@ -18,9 +18,20 @@ const useStyles = makeStyles(() => ({
     },
   },
 
+  title: {
+    margin: 0,
+    padding: 0,
+  },
+
   tableBreak: {
     "@media print": {
       pageBreakInside: "auto",
+    },
+  },
+
+  tableWOBreak: {
+    "@media print": {
+      pageBreakAfter: "avoid",
     },
   },
 
@@ -38,10 +49,13 @@ export default function PrintFormContent() {
 
   return (
     <>
-      <p align="center">
+      <p align="center" className={classes.default}>
         <strong>
           Анкета – Заявление на получение кредита № {state.currentFormId}
         </strong>
+      </p>
+      <p className={classes.default} align="center">
+        Приложение №1 к договору оказания информационных услуг
       </p>
       <table
         border="1"
@@ -54,7 +68,7 @@ export default function PrintFormContent() {
         <tbody>
           <tr>
             <td width="684" colSpan="22" valign="top">
-              <p>ПАРАМЕТРЫ КРЕДИТА</p>
+              <p className={classes.title}>ПАРАМЕТРЫ КРЕДИТА</p>
             </td>
           </tr>
           <tr>
@@ -81,7 +95,7 @@ export default function PrintFormContent() {
           </tr>
           <tr>
             <td width="684" colSpan="22" valign="top">
-              <p>ПЕРСОНАЛЬНЫЕ ДАННЫЕ</p>
+              <p className={classes.title}>ПЕРСОНАЛЬНЫЕ ДАННЫЕ</p>
             </td>
           </tr>
           <tr>
@@ -161,7 +175,7 @@ export default function PrintFormContent() {
           </tr>
           <tr>
             <td width="684" colSpan="22" valign="top">
-              <p>КОНТАКТНАЯ ИНФОРМАЦИЯ</p>
+              <p className={classes.title}>КОНТАКТНАЯ ИНФОРМАЦИЯ</p>
             </td>
           </tr>
           <tr>
@@ -236,7 +250,7 @@ export default function PrintFormContent() {
           )}
           <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
-              <p>СВЕДЕНИЯ О СЕМЬЕ</p>
+              <p className={classes.title}>СВЕДЕНИЯ О СЕМЬЕ</p>
             </td>
           </tr>
           <tr>
@@ -298,7 +312,7 @@ export default function PrintFormContent() {
           })}
           <tr>
             <td width="684" colSpan="22" valign="top">
-              <p>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</p>
+              <p className={classes.title}>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</p>
             </td>
           </tr>
           <tr className={classes.pageBreak}>
@@ -321,7 +335,7 @@ export default function PrintFormContent() {
           </tr>
           <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
-              <p>ИНФОРМАЦИЯ ОБ ОБРАЗОВАНИИ</p>
+              <p className={classes.title}>ИНФОРМАЦИЯ ОБ ОБРАЗОВАНИИ</p>
             </td>
           </tr>
           <tr className={classes.pageBreak}>
@@ -334,7 +348,7 @@ export default function PrintFormContent() {
           </tr>
           <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
-              <p>ИНФОРМАЦИЯ О ТРУДОУСТРОЙСТВЕ</p>
+              <p className={classes.title}>ИНФОРМАЦИЯ О ТРУДОУСТРОЙСТВЕ</p>
             </td>
           </tr>
           <tr className={classes.pageBreak}>
@@ -402,10 +416,10 @@ export default function PrintFormContent() {
           </tr>
           <tr className={classes.pageBreak}>
             <td width="684" colSpan="22" valign="top">
-              <p>ИНФОРМАЦИЯ О ДОХОДАХ/РАСХОДАХ</p>
+              <p className={classes.title}>ИНФОРМАЦИЯ О ДОХОДАХ/РАСХОДАХ</p>
             </td>
           </tr>
-          <tr className={classes.pageBreak}>
+          <tr className={classes.tableWOBreak}>
             <td width="276" colSpan="6" valign="top" align="center">
               <p className={classes.default}>
                 <strong>Ежемесячные доходы</strong>
@@ -427,7 +441,7 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr className={classes.pageBreak}>
+          <tr className={classes.tableBreak}>
             <td width="276" colSpan="6" valign="top">
               <p className={classes.default}>
                 Основная Зарплата (после уплаты налогов) форма 2НДФЛ
@@ -443,7 +457,7 @@ export default function PrintFormContent() {
               <p className={classes.default}>{state.cost0}</p>
             </td>
           </tr>
-          <tr className={classes.pageBreak}>
+          <tr className={classes.tableBreak}>
             <td width="276" colSpan="6" valign="top">
               <p className={classes.default}>
                 Доход от сдачи в аренду недвижимости (после уплаты налогов)
