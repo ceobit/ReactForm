@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
   },
   table: {
-    marginTop: "50px",
-    marginBottom: "50px"
+    marginTop: "30px",
+    marginBottom: "30px"
   },
 
   td: {
