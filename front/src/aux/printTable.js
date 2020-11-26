@@ -19,12 +19,14 @@ const printTable = (stateTable, array, col = 1) => {
         );
       }
     } else {
-        html.push(`<td align="center"><p className={classes.default}>${i+1}</p></td>`);
-        html.push(
-            `<td width="174" colSpan=${col} align="center"><p className={classes.default}>${el}</p></td>`
-        );
-        html.push("</tr>");
-        html.push("<tr>");
+      html.push(
+        `<td align="center"><p className={classes.default}>${i + 1}</p></td>`
+      );
+      html.push(
+        `<td width="174" colSpan=${col} align="center"><p className={classes.default}>${el}</p></td>`
+      );
+      html.push("</tr>");
+      html.push("<tr>");
     }
   });
   html.push(`</tr>`);
