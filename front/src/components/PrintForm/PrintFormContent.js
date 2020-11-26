@@ -29,12 +29,6 @@ const useStyles = makeStyles(() => ({
     },
   },
 
-  tableWOBreak: {
-    "@media print": {
-      pageBreakAfter: "avoid",
-    },
-  },
-
   pageBreak: {
     "@media print": {
       pageBreakAfter: "auto",
@@ -414,12 +408,12 @@ export default function PrintFormContent() {
               </p>
             </td>
           </tr>
-          <tr className={classes.pageBreak}>
+          <tr>
             <td width="684" colSpan="22" valign="top">
               <p className={classes.title}>ИНФОРМАЦИЯ О ДОХОДАХ/РАСХОДАХ</p>
             </td>
           </tr>
-          <tr className={classes.tableWOBreak}>
+          <tr>
             <td width="276" colSpan="6" valign="top" align="center">
               <p className={classes.default}>
                 <strong>Ежемесячные доходы</strong>
