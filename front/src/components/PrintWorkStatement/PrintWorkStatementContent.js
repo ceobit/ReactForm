@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
   },
 
     mainText: {
-      fontSize: "10px"
+      fontSize: "12px"
     }
 }));
 
