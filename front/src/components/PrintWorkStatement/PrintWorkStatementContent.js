@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
   },
   table: {
-    marginTop: "30px",
-    marginBottom: "30px"
+    marginTop: "50px",
+    marginBottom: "50px"
   },
 
   td: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
   },
 
     mainText: {
-      fontSize: "12px"
+      fontSize: "10px"
     }
 }));
 
@@ -98,7 +98,7 @@ export default function PrintWorkStatementContent() {
       </div>
       <div className={classes.table}>
         <table border="1" cellSpacing="0" cellPadding="0" width="688">
-          <tr height="40">
+          <tr>
             <td width="50" align="center">
               №
             </td>
@@ -110,33 +110,33 @@ export default function PrintWorkStatementContent() {
             printTable(state.completeWorks, arrayCompleteWorks, 2)
           ) : (
             <>
-              <tr height="40">
+              <tr>
                 <td align="center"> 1.</td>
-                <td></td>
+                <td height="40"></td>
               </tr>
-              <tr height="40">
+              <tr>
                 <td align="center"> 2.</td>
-                <td></td>
+                <td height="40"></td>
               </tr>
-              <tr height="40">
+              <tr>
                 <td align="center"> 3.</td>
-                <td></td>
+                <td height="40"></td>
               </tr>
-              <tr height="40">
+              <tr>
                 <td align="center"> 4.</td>
-                <td></td>
+                <td height="40"></td>
               </tr>
-              <tr height="40">
+              <tr>
                 <td align="center"> 5.</td>
-                <td></td>
+                <td height="40"></td>
               </tr>
-              <tr height="40">
+              <tr>
                 <td align="center"> 6.</td>
-                <td></td>
+                <td height="40"></td>
               </tr>
-              <tr height="40">
+              <tr>
                 <td align="center"> 7.</td>
-                <td></td>
+                <td height="40"></td>
               </tr>
             </>
           )}
