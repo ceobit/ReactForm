@@ -61,6 +61,7 @@ export default function CostTable() {
     }
   }, [state.currentFormId, state.needChangeForm]);
 
+
   return (
     <>
       <Grid item xs={12} sm={6} className={classes.gridSubtitle}>
