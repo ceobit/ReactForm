@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
 
 export default function PrintFormContent() {
   const classes = useStyles();
-  const [state, setState] = useContext(AppContext);
+  const [state] = useContext(AppContext);
 
   return (
     <>

@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
 
 export default function PrintContractContent() {
   const classes = useStyles();
-  const [state, setState] = useContext(AppContext);
+  const [state] = useContext(AppContext);
 
   return (
     <div className={classes.wrapper}>

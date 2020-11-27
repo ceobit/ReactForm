@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
 
 export default function PrintWorkStatementContent() {
   const classes = useStyles();
-  const [state, setState] = useContext(AppContext);
+  const [state] = useContext(AppContext);
 
   return (
     <>
