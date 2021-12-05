@@ -404,7 +404,7 @@ export default function PrintContractContent() {
               </p>
               <p className={classes.default}>ИП Фомченко Иван Евгеньевич</p>
               <p className={classes.default}>
-                660077, г. Красноярск ул. Авиаторов, д. 21 офис 656.
+                660077, г. Красноярск ул. Авиаторов, д. 44 пом. 15.
               </p>
               <p className={classes.default}>
                 Почтовый адрес для корреспонденции 660077
@@ -420,7 +420,7 @@ export default function PrintContractContent() {
                 р/сч 40802810706500005300 БИК 044525999
               </p>
               <p className={classes.default}>кор.сч. 30101810845250000999</p>
-              <p className={classes.default}>тел. +79233410100, +79233410300</p>
+              <p className={classes.default}>тел. +79333257009, +79333257006</p>
               <p className={classes.default}>Фомченко И.Е</p>
             </td>
             <td width="120"></td>

@@ -244,7 +244,6 @@ const EnhancedTableToolbar = ({
   const handleCreateForm = () => {
     history.push("/create");
   };
-
   return (
     <Toolbar
       className={clsx(classes.root, {
