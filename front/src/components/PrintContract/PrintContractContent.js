@@ -46,7 +46,7 @@ export default function PrintContractContent() {
         <p> {`${moment(state.created_at).format("DD.MM.YYYY")} г.`}</p>
       </div>
       <p className={classes.default}>
-        Индивидуальный предприниматель Фомченко Иван Евгеньевич, именуемый в
+        Индивидуальный предприниматель Колотилина Валентина Александровна, именуемый в
         дальнейшем «Исполнитель» с одной стороны, и гражданин/ка{" "}
         {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}
         , именуемый в дальнейшем «Клиент», с другой стороны, совместно именуемые
@@ -402,14 +402,14 @@ export default function PrintContractContent() {
               <p className={classes.footer}>
                 <strong>Исполнитель: </strong>
               </p>
-              <p className={classes.default}>ИП Фомченко Иван Евгеньевич</p>
+              <p className={classes.default}>ИП Колотилина Валентина Александровна</p>
               <p className={classes.default}>
-                660077, г. Красноярск ул. Авиаторов, д. 44 пом. 15.
+                660022, г. Красноярск ул. Партизана Железняка, д. 18 оф. 5-22.
               </p>
               <p className={classes.default}>
-                Почтовый адрес для корреспонденции 660077
+                Почтовый адрес для корреспонденции 660022
               </p>
-              <p className={classes.default}>ОГРНИП 319246800133560</p>
+              <p className={classes.default}>ОГРНИП 322246800052190</p>
               <p className={classes.default}>
                 Филиал Точка Публичного акционерного общества
               </p>
@@ -417,11 +417,11 @@ export default function PrintContractContent() {
                 Банка «Финансовая Корпорация Открытие»
               </p>
               <p className={classes.default}>
-                р/сч 40802810706500005300 БИК 044525999
+                р/сч 40802810601500305655 БИК 044525999
               </p>
               <p className={classes.default}>кор.сч. 30101810845250000999</p>
-              <p className={classes.default}>тел. +79333257009, +79333257006</p>
-              <p className={classes.default}>Фомченко И.Е</p>
+              <p className={classes.default}>тел. +79333305201, +79333305203</p>
+              <p className={classes.default}>Колотилина В.А.</p>
             </td>
             <td width="120"></td>
             <td width="300" valign="top">

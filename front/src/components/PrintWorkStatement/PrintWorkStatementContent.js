@@ -58,7 +58,7 @@ export default function PrintWorkStatementContent() {
         <strong>(оказанных услуг)</strong>
       </p>
       <div className={classes.mainText}>
-        <p className={classes.default}>Исполнитель: ИП Фомченко И.Е</p>
+        <p className={classes.default}>Исполнитель: ИП Колотилина Е.А.</p>
         <p align="center" className={classes.default}>
           Заказчик:{" "}
           {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}
