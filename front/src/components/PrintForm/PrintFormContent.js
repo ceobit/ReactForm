@@ -650,14 +650,14 @@ export default function PrintFormContent() {
                 требованиями законодательства Российской Федерации.
               </p>
               <p className={classes.default}>
-                6. В случае принятия отрицательного решения ИП Колотилина Е.А. не
+                6. В случае принятия отрицательного решения ИП Колотилина В.А. не
                 обязан возвращать мне настоящую Анкету-заявление.
               </p>
             </td>
           </tr>
           <tr>
             <td width="344" colSpan="11">
-              <p className={classes.default}>ИП Колотилина Е.А.</p>
+              <p className={classes.default}>ИП Колотилина В.А.</p>
             </td>
             <td width="344" colSpan="11">
               <p className={classes.default}>{`Дата заполнения: ${moment(
