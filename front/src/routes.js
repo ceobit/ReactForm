@@ -14,6 +14,7 @@ export const useRoutes = (isAuth) => {
       <Switch>
         <Route path="/main" exact>
           <MainPage />
+            {/*<PrintWorkStatement />*/}
         </Route>
         <Route path="/create" exact>
           <DocumentsContainer />

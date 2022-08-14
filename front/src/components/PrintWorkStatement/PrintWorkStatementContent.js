@@ -1,177 +1,191 @@
-import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { AppContext } from "../../context";
+import React, {useContext} from "react";
+import {makeStyles} from "@material-ui/core/styles";
+import {AppContext} from "../../context";
 import moment from "moment";
-import arrayCompleteWorks from "../../data/arrayCompleteWorks";
-import printTable from "../../aux/printTable";
 
 const useStyles = makeStyles(() => ({
-  default: {
-    margin: 0,
-  },
+    default: {
+        margin: 0,
+    },
 
-  flex: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  table: {
-    marginTop: "30px",
-    marginBottom: "30px"
-  },
+    flex: {
+        display: "flex",
+        justifyContent: "space-between",
+    },
+    table: {
+        marginTop: "10px",
+        marginBottom: "10px"
+    },
 
-  td: {
-    paddingTop: "20px",
-  },
+    td: {
+        paddingTop: "20px",
+    },
 
     mainText: {
-      fontSize: "12px"
+        fontSize: "12px"
     }
 }));
 
 export default function PrintWorkStatementContent() {
-  const classes = useStyles();
-  const [state] = useContext(AppContext);
+    const classes = useStyles();
+    const [state] = useContext(AppContext);
 
-  return (
-    <>
-      <div className={classes.flex}>
-        <p>
-          <strong>{`№ ${state.currentFormId} от ${moment(
-            state.created_at
-          ).format("DD.MM.YYYY")} г.`}</strong>
-        </p>
-        <p align="right">
-          <strong>Приложение № 2 к договору</strong>
-        </p>
-      </div>
-      <p align="center" className={classes.default}>
-        <strong>
-          {`Акт № ${state.currentFormId} от ${moment(
-            state.workStatementDate
-          ).format("DD.MM.YYYY")} г.`}
-        </strong>
-      </p>
-      <p align="center" className={classes.default}>
-        <strong>о приемке выполненных работ</strong>
-      </p>
-      <p align="center" className={classes.default}>
-        <strong>(оказанных услуг)</strong>
-      </p>
-      <div className={classes.mainText}>
-        <p className={classes.default}>Исполнитель: ИП Колотилина В.А.</p>
-        <p align="center" className={classes.default}>
-          Заказчик:{" "}
-          {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}
-        </p>
-        <p className={classes.default}>
-          В рамках оказания информационных услуг Исполнитель предоставил
-          Заказчику информацию о банках:
-        </p>
-        <p>
-          1. Оказал устную консультацию по общим основаниям, правилам и
-          процедурам предоставления кредита.
-        </p>
-        <p className={classes.default}>
-          2. Оказал Клиенту консультацию об основных возможных причинах отказа в
-          предоставлении Банками кредитов Клиенту на основе анализа Анкеты
-          Клиента.
-        </p>
-        <p>
-          3. Оказал Клиенту консультацию – рекомендации по заполнению заявления
-          в Банк указанный в пункте 5 настоящего Акта для получения кредита для
-          целей указанных в Приложении №1 к договору.
-        </p>
-        <p className={classes.default}>
-          4. Оказал Клиенту устные консультации по способам обеспечения
-          исполнения обязательств Клиента перед Банком по возврату кредита для
-          получения кредита для целей указанных в Приложении №1 к договору.
-        </p>
-        <p>
-          5. Оказал Клиенту устные консультации по правилам и условиям
-          страхования ответственности заемщиков, разъяснил правила возврата
-          страховой премии в «период охлаждения».
-        </p>
-        <p className={classes.default}>
-          6. Произвел подбор Банка, предоставляющего кредиты на условиях,
-          установленных в Анкете Клиента (Приложение №1) к настоящему договору.
-        </p>
-      </div>
-      <div className={classes.table}>
-        <table border="1" cellSpacing="0" cellPadding="0" width="688">
-          <tr>
-            <td width="50" align="center">
-              №
-            </td>
-            <td width="638" align="center">
-              Наименование работы (услуги)
-            </td>
-          </tr>
-          {state.completeWorks.length > 0 ? (
-            printTable(state.completeWorks, arrayCompleteWorks, 2)
-          ) : (
-            <>
-              <tr>
-                <td align="center"> 1.</td>
-                <td height="40"></td>
-              </tr>
-              <tr>
-                <td align="center"> 2.</td>
-                <td height="40"></td>
-              </tr>
-              <tr>
-                <td align="center"> 3.</td>
-                <td height="40"></td>
-              </tr>
-              <tr>
-                <td align="center"> 4.</td>
-                <td height="40"></td>
-              </tr>
-              <tr>
-                <td align="center"> 5.</td>
-                <td height="40"></td>
-              </tr>
-              <tr>
-                <td align="center"> 6.</td>
-                <td height="40"></td>
-              </tr>
-              <tr>
-                <td align="center"> 7.</td>
-                <td height="40"></td>
-              </tr>
-            </>
-          )}
-        </table>
-      </div>
-      <p>
-        <strong>
-          Заказчик по объему, качеству и срокам оказания услуг претензий не
-          имеет.
-        </strong>
-        <p></p>
-        <table width="688">
-          <tr>
-            <td width="344" colSpan="11">
-              Исполнитель
-            </td>
-            <td width="344" colSpan="11">
-              Заказчик
-            </td>
-          </tr>
-          <tr>
-            <td width="344" colSpan="11">
-              <p className={classes.default}>_________________</p>
-              <p className={classes.default}>Подпись</p>
-            </td>
-            <td width="344" colSpan="11">
-              <p></p>
-              <p className={classes.default}>
-                __________________________________/_________________
-              </p>
-              <p className={classes.default}>ФИО/Подпись</p>
-            </td>
-          </tr>
-        </table>
-      </p>
-    </>
-  );
+    return (
+        <>
+            <div className={classes.flex}>
+                <p>
+                    <strong>{`№ ${state.currentFormId} от ${moment(
+                        state.created_at
+                    ).format("DD.MM.YYYY")} г.`}</strong>
+                </p>
+                <p align="right">
+                    <strong>Приложение № 2 к договору</strong>
+                </p>
+            </div>
+            <p align="center" className={classes.default}>
+                <strong>
+                    {`Акт № ${state.currentFormId} от ${moment(
+                        state.workStatementDate
+                    ).format("DD.MM.YYYY")} г.`}
+                </strong>
+            </p>
+            <p align="center" className={classes.default}>
+                <strong>о приемке выполненных работ</strong>
+            </p>
+            <p align="center" className={classes.default}>
+                <strong>(оказанных услуг)</strong>
+            </p>
+            <div className={classes.mainText}>
+                <p className={classes.default}>Исполнитель: ИП Колотилина В.А.</p>
+                <p className={classes.default}>
+                    Заказчик:{" "}
+                    {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}
+                </p>
+                <p className={classes.default}>
+                    В рамках договора оказания информационных услуг № ${state.currentFormId} от
+                    {` ${moment(state.created_at).format("DD.MM.YYYY")} г.`} «Исполнитель» оказал Клиенту
+                    {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} следующие услуги:
+                </p>
+                <p className={classes.default}>
+                    1. устную консультацию направленную на выявление финансовых рисков Клиента;
+                </p>
+                <p className={classes.default}>
+                    2. устную консультацию по расчету кредитной нагрузки в целях своевременного исполнения клиентом
+                    кредитных обязательств,
+                    в том числе с учетом наличия действующих кредитных обязательств клиента;
+                </p>
+                <p className={classes.default}>
+                    3. устную консультацию по определению кредитного рейтинга Клиента;
+                </p>
+                <p className={classes.default}>
+                    4. устную консультацию Клиенту об основных причинах отказа в предоставлении Банками кредитов
+                    заемщикам;
+                </p>
+                <p className={classes.default}>
+                    5. услуга по подбору Банка, предоставляющего кредиты на условиях, установленных соглашением сторон в
+                    Анкете Клиента (Приложение №1) к Договору, даны рекомендации по заполнению заявления на получение
+                    кредита в Банк;
+                </p>
+                <p className={classes.default}>
+                    6. устную консультацию Клиенту по способам обеспечения исполнения обязательств заемщиков перед
+                    Банком по возврату кредитов, правилам и условиям страхования ответственности заемщиков,
+                    рекомендациям по предоставлению обеспечения возврата кредита.
+                </p>
+            </div>
+            <p className={classes.default}>
+                Вышеперечисленные услуги оказаны согласно договору своевременно и в необходимом объеме и в
+                соответствии с требованиями, установленными Договором к их качеству.
+            </p>
+            <p align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+            <p className={classes.default}>
+                Клиент {` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} претензий по объему,
+                качеству и срокам оказания услуг не имеет.
+            </p>
+            <p align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+            <p className={classes.default}>В рамках оказания информационных услуг Исполнитель предоставил Заказчику
+                информацию о банках:</p>
+            <div className={classes.table}>
+                <table border="1" cellSpacing="0" cellPadding="0" width="688">
+                    <tr>
+                        <td width="50" align="center">
+                            №
+                        </td>
+                        <td width="638" align="center">
+                            Наименование кредитной организации (адрес, контактные данные)
+                        </td>
+                        <td width="638" align="center">
+                            Перечень документов предоставляемых в кредитную организацию
+                        </td>
+                        <td width="638" align="center">
+                            Параметры подобранного кредитного продукта
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center"> 1.</td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                    </tr>
+                    <tr>
+                        <td align="center"> 2.</td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                    </tr>
+                    <tr>
+                        <td align="center"> 3.</td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                    </tr>
+                    <tr>
+                        <td align="center"> 4.</td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                    </tr>
+                    <tr>
+                        <td align="center"> 5.</td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                        <td height="40"></td>
+                    </tr>
+                </table>
+            </div>
+            <p className={classes.default}>
+                <p className={classes.default}>
+                    Вышеперечисленные услуги оказаны согласно договору своевременно и
+                    в необходимом объеме и в соответствии с требованиями, установленными Договором к их качеству.
+                </p>
+                <p align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+                <p>
+                Клиент ФИО претензий по объему, качеству и срокам оказания услуг не имеет.
+            </p>
+                <p className={classes.default} align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+                <table style={{'marginTop': '5px'}}>
+                    <tr>
+                        <td>
+                            Исполнитель
+                        </td>
+                        <td>
+                            _________________/ ИП Колотилина В.А.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p className={classes.default}>Подпись</p>
+                        </td>
+                        {/*<td width="344" colSpan="11">*/}
+                        {/*    <p></p>*/}
+                        {/*    <p className={classes.default}>*/}
+                        {/*        __________________________________/_________________*/}
+                        {/*    </p>*/}
+                        {/*    <p className={classes.default}>ФИО/Подпись</p>*/}
+                        {/*</td>*/}
+                    </tr>
+                </table>
+            </p>
+        </>
+    );
 }

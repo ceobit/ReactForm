@@ -102,6 +102,13 @@ const initialState = {
   serviceTime: "",
   costFirstStep: "",
   costSecondStep: "",
+  costItem1: "",
+  costItem2: "",
+  costItem3: "",
+  costItem4: "",
+  costItem5: "",
+  costItem6: "",
+  costItem7: "",
   workStatementDate:  new Date(),
   userName: "",
   login: ""
