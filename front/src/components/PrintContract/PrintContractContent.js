@@ -49,9 +49,8 @@ export default function PrintContractContent() {
                 <strong>Договор</strong>
             </p>
             <p className={classes.default}>
-                об оказании информационных услуг
+                об оказании информационных услуг № {state.currentFormId}
             </p>
-            <p className={classes.default}>№ {state.currentFormId}</p>
             <div className={classes.flex}>
                 <p>г. Красноярск </p>
                 <p> {`${moment(state.created_at).format("DD.MM.YYYY")} г.`}</p>

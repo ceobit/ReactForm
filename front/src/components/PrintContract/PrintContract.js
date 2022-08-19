@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
   flex: {
     display: "flex",
     flexDirection: "column",
+    "@media print": {
+      margin: '8mm',
+    },
   },
   buttons: {
     display: "flex",
