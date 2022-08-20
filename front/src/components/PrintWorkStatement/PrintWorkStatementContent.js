@@ -6,6 +6,7 @@ import moment from "moment";
 const useStyles = makeStyles(() => ({
     default: {
         margin: 0,
+        fontSize: "14px"
     },
 
     flex: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(() => ({
     },
 
     mainText: {
-        fontSize: "12px"
+        fontSize: "14px"
     }
 }));
 
@@ -62,9 +63,8 @@ export default function PrintWorkStatementContent() {
                     {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}
                 </p>
                 <p className={classes.default}>
-                    В рамках договора оказания информационных услуг № ${state.currentFormId} от
-                    {` ${moment(state.created_at).format("DD.MM.YYYY")} г.`} «Исполнитель» оказал Клиенту
-                    {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} следующие услуги:
+                    В рамках договора оказания информационных услуг «Исполнитель» оказал Клиенту
+                    {` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} следующие услуги:
                 </p>
                 <p className={classes.default}>
                     1. устную консультацию направленную на выявление финансовых рисков Клиента;
@@ -90,6 +90,12 @@ export default function PrintWorkStatementContent() {
                     6. устную консультацию Клиенту по способам обеспечения исполнения обязательств заемщиков перед
                     Банком по возврату кредитов, правилам и условиям страхования ответственности заемщиков,
                     рекомендациям по предоставлению обеспечения возврата кредита.
+                </p>
+                <p className={classes.default}>
+                    7. услуга по получению дополнительной информации об условиях кредитования и проведению переговоров с
+                    компетентными сотрудниками банка по средствам телефонной или почтовой электронной связи.
+                    Услуга по оказанию полного информационного содействия в подаче клиентом документов, необходимых для
+                    олучения клиентом решения о кредите в Банке.
                 </p>
             </div>
             <p className={classes.default}>
@@ -122,33 +128,21 @@ export default function PrintWorkStatementContent() {
                     </tr>
                     <tr>
                         <td align="center"> 1.</td>
-                        <td height="40"></td>
-                        <td height="40"></td>
-                        <td height="40"></td>
+                        <td height="80"></td>
+                        <td height="80"></td>
+                        <td height="80"></td>
                     </tr>
                     <tr>
                         <td align="center"> 2.</td>
-                        <td height="40"></td>
-                        <td height="40"></td>
-                        <td height="40"></td>
+                        <td height="80"></td>
+                        <td height="80"></td>
+                        <td height="80"></td>
                     </tr>
                     <tr>
                         <td align="center"> 3.</td>
-                        <td height="40"></td>
-                        <td height="40"></td>
-                        <td height="40"></td>
-                    </tr>
-                    <tr>
-                        <td align="center"> 4.</td>
-                        <td height="40"></td>
-                        <td height="40"></td>
-                        <td height="40"></td>
-                    </tr>
-                    <tr>
-                        <td align="center"> 5.</td>
-                        <td height="40"></td>
-                        <td height="40"></td>
-                        <td height="40"></td>
+                        <td height="80"></td>
+                        <td height="80"></td>
+                        <td height="80"></td>
                     </tr>
                 </table>
             </div>
@@ -159,10 +153,10 @@ export default function PrintWorkStatementContent() {
                 </p>
                 <p align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
                 <p>
-                Клиент ФИО претензий по объему, качеству и срокам оказания услуг не имеет.
+                Клиент {` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} претензий по объему, качеству и срокам оказания услуг не имеет.
             </p>
                 <p className={classes.default} align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
-                <table style={{'marginTop': '5px'}}>
+                <table style={{'marginTop': '12px'}}>
                     <tr>
                         <td>
                             Исполнитель
