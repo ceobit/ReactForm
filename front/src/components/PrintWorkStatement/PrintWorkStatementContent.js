@@ -65,7 +65,7 @@ export default function PrintWorkStatementContent() {
                 <p className={classes.default}>
                     В рамках договора оказания информационных услуг № {state.currentFormId} от
                     {` ${moment(state.created_at).format("DD.MM.YYYY")} г.`} «Исполнитель» оказал Клиенту
-                    {`${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} следующие услуги:
+                    {` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} следующие услуги:
                 </p>
                 <p className={classes.default}>
                     1. устную консультацию направленную на выявление финансовых рисков Клиента;
