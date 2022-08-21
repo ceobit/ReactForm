@@ -96,19 +96,21 @@ export default function PrintWorkStatementContent() {
                     7. услуга по получению дополнительной информации об условиях кредитования и проведению переговоров с
                     компетентными сотрудниками банка по средствам телефонной или почтовой электронной связи.
                     Услуга по оказанию полного информационного содействия в подаче клиентом документов, необходимых для
-                    олучения клиентом решения о кредите в Банке.
+                    получения клиентом решения о кредите в Банке.
                 </p>
             </div>
             <p className={classes.default}>
                 Вышеперечисленные услуги оказаны согласно договору своевременно и в необходимом объеме и в
                 соответствии с требованиями, установленными Договором к их качеству.
             </p>
-            <p align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+            <p align='center'>Подпись
+                ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
             <p className={classes.default}>
                 Клиент {` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} претензий по объему,
                 качеству и срокам оказания услуг не имеет.
             </p>
-            <p align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+            <p align='center'>Подпись
+                ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
             <p className={classes.default}>В рамках оказания информационных услуг Исполнитель предоставил Заказчику
                 информацию о банках:</p>
             <div className={classes.table}>
@@ -152,11 +154,14 @@ export default function PrintWorkStatementContent() {
                     Вышеперечисленные услуги оказаны согласно договору своевременно и
                     в необходимом объеме и в соответствии с требованиями, установленными Договором к их качеству.
                 </p>
-                <p align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+                <p align='center'>Подпись
+                    ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
                 <p>
-                Клиент {` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} претензий по объему, качеству и срокам оказания услуг не имеет.
-            </p>
-                <p className={classes.default} align='center'>Подпись ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
+                    <strong>Клиент {` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`} претензий
+                        по объему, качеству и срокам оказания услуг не имеет.</strong>
+                </p>
+                <p className={classes.default} align='center'>Подпись
+                    ______________________/{` ${state.clientSurname} ${state.clientName} ${state.clientPatronymic}`}</p>
                 <table style={{'marginTop': '12px'}}>
                     <tr>
                         <td>
